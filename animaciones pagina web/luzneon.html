@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bienvenido</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Estilos personalizados -->
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f3f3f3;
+    }
+
+    .jumbotron {
+      background: linear-gradient(to right, #f8c92d, #e94057);
+      color: #fff;
+      padding: 80px 20px;
+      border-radius: 0;
+      text-align: center;
+      position: relative;
+    }
+
+    h1 {
+      font-size: 4rem;
+      margin-bottom: 40px;
+      animation: neonGlow 2s ease-in-out infinite alternate;
+    }
+
+    p {
+      font-size: 1.5rem;
+      margin-bottom: 30px;
+      animation: fadeIn 1s;
+    }
+
+    .btn {
+      background-color: #333;
+      color: #fff;
+      font-size: 1.3rem;
+      border-radius: 25px;
+      padding: 15px 40px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .btn:hover {
+      background-color: #555;
+      transform: scale(1.05);
+    }
+
+    @keyframes neonGlow {
+      from {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ff80ed, 0 0 40px #ff80ed, 0 0 50px #ff80ed, 0 0 60px #ff80ed, 0 0 70px #ff80ed;
+      }
+      to {
+        text-shadow: 0 0 20px #fff, 0 0 30px #ff80ed, 0 0 40px #ff80ed, 0 0 50px #ff80ed, 0 0 60px #ff80ed, 0 0 70px #ff80ed, 0 0 80px #ff80ed;
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="jumbotron">
+    <h1>Welcome!</h1>
+    <p>Thank you for visiting our website. We hope you enjoy your stay.</p>
+    <a href="#" class="btn btn-lg">Explore</a>
+  </div>
+
+  <!-- jQuery y Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

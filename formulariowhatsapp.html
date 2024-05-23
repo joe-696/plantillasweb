@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enviar Mensaje por WhatsApp</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212; /* Gris oscuro */
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+        }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: #1f1f1f; /* Gris más oscuro */
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #ddd; /* Blanco suavizado */
+            margin-bottom: 20px;
+        }
+        form {
+            margin-top: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #ddd; /* Blanco suavizado */
+        }
+        input[type="text"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #444; /* Gris más oscuro */
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            background-color: #333; /* Gris */
+            color: #ddd; /* Blanco suavizado */
+        }
+        button[type="submit"] {
+            padding: 12px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 16px;
+        }
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        .icono {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Enviar Mensaje por WhatsApp</h1>
+        <form id="formulario">
+            <label for="nombre"><i class="fas fa-user icono"></i>Nombre y Apellidos:</label>
+            <input type="text" id="nombre" name="nombre" placeholder="Nombre y Apellidos" required>
+            <label for="servicio"><i class="fas fa-cogs icono"></i>Servicio que Requiere:</label>
+            <select id="servicio" name="servicio" required>
+                <option value="">Selecciona un servicio</option>
+                <option value="Fijar publicación por facultad">Fijar publicación por facultad</option>
+                <option value="Fijar publicación index">Fijar publicación index</option>
+            </select>
+            <label for="descripcion"><i class="fas fa-file-alt icono"></i>Descripción de la Publicación:</label>
+            <textarea id="descripcion" name="descripcion" placeholder="Descripción de la Publicación" required></textarea>
+            <button type="submit"><i class="fab fa-whatsapp icono"></i>Guardar y Enviar</button>
+        </form>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+    <script>
+        document.getElementById("formulario").addEventListener("submit", function(event) {
+            event.preventDefault(); // Evitar que el formulario se envíe
+
+            const nombre = document.getElementById("nombre").value;
+            const servicio = document.getElementById("servicio").value;
+            const descripcion = document.getElementById("descripcion").value;
+
+            // Construir el mensaje con la información del formulario
+            const mensaje = `Nombre y Apellidos: ${nombre}\nServicio que Requiere: ${servicio}\nDescripción de la Publicación: ${descripcion}`;
+
+            // Actualizar el enlace de WhatsApp con el mensaje y redirigir automáticamente
+            const enlaceWhatsApp = document.createElement('a');
+            enlaceWhatsApp.href = "https://chat.whatsapp.com/B7ANnkUxiDq6tetlvyc3C6?text=" + encodeURIComponent(mensaje);
+            enlaceWhatsApp.target = "_blank";
+            document.body.appendChild(enlaceWhatsApp);
+            enlaceWhatsApp.click();
+            document.body.removeChild(enlaceWhatsApp);
+
+            // Limpiar los campos del formulario
+            document.getElementById("nombre").value = "";
+            document.getElementById("servicio").value = "";
+            document.getElementById("descripcion").value = "";
+        });
+    </script>
+</body>
+</html>

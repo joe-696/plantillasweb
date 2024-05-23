@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>React Example</title>
+  <style>
+    /* Estilo para la animación */
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    /* Estilos adicionales */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    p {
+      margin: 20px 0;
+      overflow: hidden;
+      white-space: nowrap;
+      animation: typing 3s steps(30, end);
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <p>Este es un ejemplo de ReactJS.</p>
+  </div>
+
+  <!-- Incluyendo ReactJS desde un CDN -->
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel">
+    // Componente funcional que representa la aplicación
+    function App() {
+      return (
+        <div>
+          <p>Este es un ejemplo de ReactJS.</p>
+        </div>
+      );
+    }
+
+    // Renderizamos la aplicación en el elemento body
+    ReactDOM.render(<App />, document.body);
+  </script>
+</body>
+</html>

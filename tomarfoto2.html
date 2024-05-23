@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Captura y Subida de Fotos</title>
+</head>
+<body>
+    <input type="password" id="passwordInput" placeholder="Ingrese la contraseña">
+    <button id="submitButton">Ingresar</button>
+    <div id="videoContainer" style="display: none;">
+        <video id="video" autoplay></video>
+    </div>
+    <button id="captureBtn">Tomar Foto</button>
+    <div id="imageLink" style="display: none;"></div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const passwordInput = document.getElementById("passwordInput");
+            const submitButton = document.getElementById("submitButton");
+            const videoContainer = document.getElementById("videoContainer");
+            const video = document.getElementById("video");
+            const captureBtn = document.getElementById("captureBtn");
+            const imageLink = document.getElementById("imageLink");
+
+            submitButton.addEventListener("click", function() {
+                const password = passwordInput.value;
+                if (password === "1234") {
+                    videoContainer.style.display = "block";
+                } else {
+                    alert("Contraseña incorrecta.");
+                }
+            });
+
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(stream => {
+                    video.srcObject = stream;
+                })
+                .catch(error => {
+                    console.error("Error obteniendo acceso a la cámara:", error);
+                });
+
+            captureBtn.addEventListener("click", function() {
+                const canvas = document.createElement("canvas");
+                const context = canvas.getContext("2d");
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+                const imgDataUrl = canvas.toDataURL("image/png");
+
+                // Subir la imagen a tu cuenta de ImgBB con tu API key
+                uploadImage(imgDataUrl);
+            });
+
+            function uploadImage(dataUrl) {
+                const formData = new FormData();
+                formData.append("key", "f40a729e25405c2c753c6af1aa4c4761");
+                formData.append("image", dataURItoBlob(dataUrl));
+
+                fetch("https://api.imgbb.com/1/upload", {
+                    method: "POST",
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert("Imagen subida con éxito. Puedes verla en este enlace: " + data.data.url);
+                    } else {
+                        alert("Error al subir la imagen: " + data.error.message);
+                    }
+                })
+                .catch(error => {
+                    console.error("Error al subir la imagen:", error);
+                });
+            }
+
+            function dataURItoBlob(dataURI) {
+                const byteString = atob(dataURI.split(',')[1]);
+                const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+                const ab = new ArrayBuffer(byteString.length);
+                const ia = new Uint8Array(ab);
+                for (let i = 0; i < byteString.length; i++) {
+                    ia[i] = byteString.charCodeAt(i);
+                }
+                return new Blob([ab], { type: mimeString });
+            }
+        });
+    </script>
+</body>
+</html>

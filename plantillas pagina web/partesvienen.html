@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bienvenido</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <style>
+    /* Estilos personalizados */
+    body {
+      background-color: #f8f9fa;
+      font-family: 'Arial', sans-serif;
+    }
+
+    .jumbotron {
+      background-image: linear-gradient(to right, #fdcb6e, #e17055, #6c5ce7);
+      color: #fff;
+      padding: 100px 20px;
+      text-align: center;
+      border-radius: 0;
+    }
+
+    .btn-primary {
+      background-color: #30336b;
+      border-color: #30336b;
+      padding: 10px 30px;
+      font-size: 20px;
+      border-radius: 30px;
+    }
+
+    .btn-primary:hover {
+      background-color: #fdcb6e;
+      border-color: #fdcb6e;
+    }
+
+    .lead {
+      font-size: 24px;
+      margin-top: 20px;
+    }
+
+    .animated-icon {
+      font-size: 60px;
+      color: #30336b;
+      margin-bottom: 20px;
+    }
+
+    .brand-logo {
+      max-width: 200px;
+      margin-bottom: 50px;
+    }
+
+    .background-shape {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      opacity: 0.2;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="jumbotron text-center position-relative">
+    <img src="https://via.placeholder.com/200" alt="Brand Logo" class="brand-logo animate__animated animate__fadeInDown">
+    <h1 class="display-4 animate__animated animate__bounceIn">¡Bienvenido!</h1>
+    <div class="animated-icon animate__animated animate__pulse animate__delay-1s"><i class="fas fa-rocket"></i></div>
+    <div class="welcome-text animate__animated animate__fadeInUp animate__delay-2s">
+      <p class="lead">Gracias por visitar nuestra página.</p>
+      <p>Esperamos que te guste lo que tenemos para ofrecerte.</p>
+    </div>
+    <a class="btn btn-primary btn-lg animate__animated animate__fadeIn animate__delay-3s" href="#" role="button">¡Empecemos!</a>
+    <svg class="background-shape" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color:#fdcb6e;stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#6c5ce7;stop-opacity:1" />
+        </linearGradient>
+      </defs>
+      <circle cx="100" cy="100" r="100" fill="url(#grad1)" />
+    </svg>
+  </div>
+
+  <!-- Font Awesome -->
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+  <!-- Bootstrap JS -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

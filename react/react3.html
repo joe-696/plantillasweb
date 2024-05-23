@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reacciones de Facebook con React Spring (Iconos)</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    /* Estilos adicionales */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .reaction-button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      outline: none;
+      padding: 10px;
+      margin-right: 10px;
+    }
+
+    .reaction-icon {
+      font-size: 24px;
+      margin-right: 5px;
+      transition: transform 0.2s;
+    }
+
+    .reaction-icon:hover {
+      transform: scale(1.2);
+    }
+
+    .reaction-options {
+      display: flex;
+      align-items: center;
+    }
+
+    .reaction-option {
+      margin-right: 10px;
+    }
+
+    .reaction-count {
+      margin-left: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <!-- Incluyendo ReactJS y React Spring desde CDNs -->
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://unpkg.com/react-spring@9/umd/react-spring.development.js"></script>
+
+  <script type="text/babel">
+    // Componente funcional que representa la aplicación
+    function App() {
+      const [reaction, setReaction] = React.useState(null);
+      const [count, setCount] = React.useState(0);
+      const [isHovered, setIsHovered] = React.useState(false);
+
+      const reactions = [
+        { name: 'like', icon: 'fa-thumbs-up' },
+        { name: 'love', icon: 'fa-heart' },
+        { name: 'haha', icon: 'fa-laugh' },
+        { name: 'wow', icon: 'fa-surprise' },
+        { name: 'sad', icon: 'fa-sad-tear' },
+        { name: 'angry', icon: 'fa-angry' }
+      ];
+
+      // Función para manejar el cambio de reacción
+      const handleReactionChange = (reaction) => {
+        setReaction(reaction);
+        setCount(count + 1);
+      };
+
+      return (
+        <div id="root">
+          <button
+            className="reaction-button"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            {isHovered && (
+              <div className="reaction-options">
+                {reactions.map((r) => (
+                  <i
+                    key={r.name}
+                    className={`reaction-icon reaction-option fas ${r.icon}`}
+                    onClick={() => handleReactionChange(r.name)}
+                  />
+                ))}
+              </div>
+            )}
+            <i
+              className={`reaction-icon fas ${reaction ? reactions.find(r => r.name === reaction).icon : 'fa-thumbs-up'}`}
+              onClick={() => handleReactionChange('like')}
+            />
+            <span className="reaction-count">{count}</span>
+          </button>
+        </div>
+      );
+    }
+
+    // Renderizamos la aplicación en el elemento con id 'root'
+    ReactDOM.render(<App />, document.getElementById('root'));
+  </script>
+</body>
+</html>

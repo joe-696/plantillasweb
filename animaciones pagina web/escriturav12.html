@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bienvenido</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <style>
+    /* Estilos personalizados */
+    body {
+      background-color: #f8f9fa;
+    }
+
+    .jumbotron {
+      background-color: #007bff;
+      color: #fff;
+      border-radius: 20px;
+      padding: 50px;
+      margin-top: 100px;
+      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-primary {
+      background-color: #ffc107;
+      border-color: #ffc107;
+    }
+
+    .btn-primary:hover {
+      background-color: #ff9800;
+      border-color: #ff9800;
+    }
+
+    /* Estilos para la animación de la pelota */
+    .ball {
+      width: 50px;
+      height: 50px;
+      background-color: #ffc107;
+      border-radius: 50%;
+      position: relative;
+      animation: bounce 1s infinite alternate;
+      margin: 0 auto;
+      margin-bottom: 20px;
+    }
+
+    @keyframes bounce {
+      0% { top: 0; }
+      100% { top: 50px; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <div id="root"></div>
+
+  <!-- React, ReactDOM, Babel JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+  <!-- Bootstrap JS -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script type="text/babel">
+    // Componente de React para la página de bienvenida
+    class WelcomePage extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {
+          showBall: true,
+          greeting: "",
+          index: 0,
+          typingSpeed: 100 // Velocidad de escritura en milisegundos
+        };
+      }
+
+      componentDidMount() {
+        // Simular la animación de escritura letra por letra después de 1 segundo
+        setTimeout(() => {
+          const greetingText = "¡Bienvenido! Gracias por visitar nuestra página. Esperamos que te guste lo que tenemos para ofrecerte.";
+          this.typeWriter(greetingText);
+          this.setState({ showBall: false });
+        }, 1000);
+      }
+
+      typeWriter(text) {
+        if (this.state.index < text.length) {
+          this.setState((prevState) => ({
+            greeting: prevState.greeting + text.charAt(prevState.index),
+            index: prevState.index + 1
+          }));
+          setTimeout(() => this.typeWriter(text), this.state.typingSpeed);
+        }
+      }
+
+      render() {
+        return (
+          <div className="jumbotron text-center animate__animated animate__fadeIn">
+            {this.state.showBall && <div className="ball"></div>}
+            <h1 className="display-4 animate__animated animate__bounceInDown">{this.state.greeting}</h1>
+            <a className="btn btn-primary btn-lg animate__animated animate__fadeIn" href="#" role="button">Explorar</a>
+          </div>
+        );
+      }
+    }
+
+    // Renderizar el componente en el elemento con id "root"
+    ReactDOM.render(<WelcomePage />, document.getElementById('root'));
+  </script>
+</body>
+</html>

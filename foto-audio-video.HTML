@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diario de Viaje</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+        }
+        .container {
+            margin-bottom: 20px;
+        }
+        #location, #audio, #photo {
+            display: none;
+            margin-bottom: 10px;
+        }
+        #photo {
+            width: 200px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Diario de Viaje</h1>
+        <div id="location"></div>
+        <button id="permitirBtn">Registrar Ubicación</button>
+    </div>
+    <div class="container">
+        <h2>Registro de Audio</h2>
+        <button id="recordBtn">Comenzar Grabación de Audio</button>
+        <button id="stopBtn" disabled>Detener Grabación de Audio</button>
+        <audio id="audio" controls></audio>
+    </div>
+    <div class="container">
+        <h2>Captura de Foto</h2>
+        <button id="captureBtn">Tomar Foto</button>
+        <img id="photo">
+    </div>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const locationDiv = document.getElementById("location");
+            const permitirBtn = document.getElementById("permitirBtn");
+            const recordBtn = document.getElementById("recordBtn");
+            const stopBtn = document.getElementById("stopBtn");
+            const captureBtn = document.getElementById("captureBtn");
+            const audio = document.getElementById("audio");
+            const photo = document.getElementById("photo");
+
+            permitirBtn.addEventListener("click", function() {
+                if ("geolocation" in navigator) {
+                    navigator.geolocation.getCurrentPosition(function(position) {
+                        const latitude = position.coords.latitude;
+                        const longitude = position.coords.longitude;
+                        fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`)
+                            .then(response => response.json())
+                            .then(data => {
+                                const address = data.display_name;
+                                locationDiv.textContent = `Ubicación Registrada: ${address}`;
+                                locationDiv.style.display = "block";
+                            })
+                            .catch(error => {
+                                console.error("Error obteniendo la dirección:", error);
+                            });
+                    }, function(error) {
+                        console.error("Error obteniendo la ubicación:", error.message);
+                    });
+                } else {
+                    console.error("Geolocalización no soportada por este navegador.");
+                }
+            });
+
+            recordBtn.addEventListener("click", function() {
+                navigator.mediaDevices.getUserMedia({ audio: true })
+                    .then(function(stream) {
+                        audio.srcObject = stream;
+                        audio.style.display = "block";
+                        recordBtn.disabled = true;
+                        stopBtn.disabled = false;
+                        stopBtn.focus();
+                    })
+                    .catch(function(error) {
+                        console.error("Error obteniendo acceso al micrófono:", error);
+                    });
+            });
+
+            stopBtn.addEventListener("click", function() {
+                const stream = audio.srcObject;
+                const tracks = stream.getTracks();
+                tracks.forEach(function(track) {
+                    track.stop();
+                });
+                audio.srcObject = null;
+                recordBtn.disabled = false;
+                stopBtn.disabled = true;
+                recordBtn.focus();
+            });
+
+            captureBtn.addEventListener("click", function() {
+                navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" } })
+                    .then(stream => {
+                        const video = document.createElement("video");
+                        video.srcObject = stream;
+                        video.addEventListener("loadedmetadata", function() {
+                            const canvas = document.createElement("canvas");
+                            canvas.width = video.videoWidth;
+                            canvas.height = video.videoHeight;
+                            const context = canvas.getContext("2d");
+                            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+                            const imgDataUrl = canvas.toDataURL("image/png");
+                            photo.src = imgDataUrl;
+                            photo.style.display = "block";
+                            stream.getTracks().forEach(track => track.stop());
+                        });
+                        document.body.appendChild(video);
+                    })
+                    .catch(error => {
+                        console.error("Error obteniendo acceso a la cámara:", error);
+                    });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>React Example</title>
+  <style>
+    /* Estilo para la animación */
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    /* Estilos adicionales */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .animated-text {
+      margin: 20px 0;
+      overflow: hidden;
+      white-space: nowrap;
+      animation: typing 3s steps(30, end);
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <!-- Incluyendo ReactJS desde un CDN -->
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel">
+    // Componente funcional que representa el texto animado
+    function AnimatedText({ children }) {
+      return <span className="animated-text">{children}</span>;
+    }
+
+    // Componente funcional que representa la aplicación
+    function App() {
+      // Definir el estado inicial del texto
+      const [texts, setTexts] = React.useState([
+        { text: "Me gusta cantar.", animate: false },
+        { text: "Este es un ejemplo de ReactJS.", animate: true }
+      ]);
+
+      // Función para agregar más texto
+      const addText = () => {
+        setTexts(prevTexts => [...prevTexts, { text: "Texto adicional", animate: true }]);
+      };
+
+      return (
+        <div id="root">
+          {texts.map((item, index) => (
+            <p key={index}>
+              {item.animate ? <AnimatedText>{item.text}</AnimatedText> : item.text}
+            </p>
+          ))}
+          <button onClick={addText}>Agregar Texto</button>
+        </div>
+      );
+    }
+
+    // Renderizar la aplicación en el elemento con id 'root'
+    ReactDOM.render(<App />, document.getElementById('root'));
+  </script>
+</body>
+</html>

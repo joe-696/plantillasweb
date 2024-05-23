@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bienvenido</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <style>
+    /* Estilos personalizados */
+    body {
+      background-color: #f8f9fa;
+    }
+
+    .jumbotron {
+      background-image: linear-gradient(120deg, #3498db, #8e44ad);
+      color: #fff;
+      padding: 100px 20px;
+      text-align: center;
+      border-radius: 0;
+    }
+
+    .btn-primary {
+      background-color: #ff7675;
+      border-color: #ff7675;
+    }
+
+    .btn-primary:hover {
+      background-color: #d63031;
+      border-color: #d63031;
+    }
+
+    .lead {
+      font-size: 24px;
+    }
+
+    .typing-animation::after {
+      content: '|';
+      animation: blink 0.75s infinite alternate;
+    }
+
+    @keyframes blink {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="jumbotron text-center">
+    <h1 class="display-4">¡<span class="typed-text"></span><span class="typing-animation"></span></h1>
+    <p class="lead animate__animated animate__fadeInDownBig">Gracias por visitar nuestra página.</p>
+    <hr class="my-4">
+    <p class="animate__animated animate__fadeInUpBig">Esperamos que te guste lo que tenemos para ofrecerte.</p>
+    <a class="btn btn-primary btn-lg animate__animated animate__fadeIn" href="#" role="button">Explorar</a>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- React JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.production.min.js"></script>
+  <script>
+    // Simulación de efecto de escritura
+    const textArray = ["Bienvenido", "¡Hola!", "Saludos"];
+    let textIndex = 0;
+    let letterIndex = 0;
+    let typingTimeout;
+
+    function typeText() {
+      if (letterIndex < textArray[textIndex].length) {
+        document.querySelector('.typed-text').textContent += textArray[textIndex].charAt(letterIndex);
+        letterIndex++;
+        typingTimeout = setTimeout(typeText, 100);
+      } else {
+        clearTimeout(typingTimeout);
+        setTimeout(eraseText, 1500);
+      }
+    }
+
+    function eraseText() {
+      if (letterIndex > 0) {
+        document.querySelector('.typed-text').textContent = textArray[textIndex].substring(0, letterIndex - 1);
+        letterIndex--;
+        typingTimeout = setTimeout(eraseText, 50);
+      } else {
+        clearTimeout(typingTimeout);
+        textIndex = (textIndex + 1) % textArray.length;
+        setTimeout(typeText, 500);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(typeText, 500);
+    });
+  </script>
+</body>
+</html>

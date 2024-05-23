@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grabación de Audio</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        #recordBtn, #stopBtn {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        #stopBtn {
+            margin-left: 10px;
+        }
+        #audio {
+            margin-top: 20px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <button id="recordBtn">Comenzar Grabación</button>
+    <button id="stopBtn" disabled>Detener Grabación</button>
+    <audio id="audio" controls></audio>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const recordBtn = document.getElementById("recordBtn");
+            const stopBtn = document.getElementById("stopBtn");
+            const audio = document.getElementById("audio");
+
+            let mediaRecorder;
+            let chunks = [];
+
+            // Comenzar la grabación cuando se hace clic en el botón de grabación
+            recordBtn.addEventListener("click", function() {
+                navigator.mediaDevices.getUserMedia({ audio: true })
+                    .then(function(stream) {
+                        mediaRecorder = new MediaRecorder(stream);
+                        mediaRecorder.start();
+
+                        recordBtn.disabled = true;
+                        stopBtn.disabled = false;
+
+                        mediaRecorder.ondataavailable = function(event) {
+                            chunks.push(event.data);
+                        };
+
+                        mediaRecorder.onstop = function() {
+                            const blob = new Blob(chunks, { type: 'audio/wav' });
+                            const url = URL.createObjectURL(blob);
+                            audio.src = url;
+                            audio.style.display = "block";
+                        };
+                    })
+                    .catch(function(error) {
+                        console.error("Error obteniendo acceso al micrófono:", error);
+                    });
+            });
+
+            // Detener la grabación cuando se hace clic en el botón de detener
+            stopBtn.addEventListener("click", function() {
+                mediaRecorder.stop();
+
+                recordBtn.disabled = false;
+                stopBtn.disabled = true;
+
+                chunks = [];
+            });
+        });
+    </script>
+</body>
+</html>

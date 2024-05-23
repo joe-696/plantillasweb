@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geolocalización y Almacenamiento Local</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 100px auto;
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        #location {
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Geolocalización y Almacenamiento Local</h1>
+        <div id="location"></div>
+    </div>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Obtener la ubicación del usuario
+            navigator.geolocation.getCurrentPosition(function(position) {
+                const latitude = position.coords.latitude;
+                const longitude = position.coords.longitude;
+
+                // Crear una solicitud para obtener datos de ubicación de OpenStreetMap
+                fetch(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const address = data.display_name;
+                        // Mostrar la dirección en pantalla
+                        const locationElement = document.getElementById("location");
+                        locationElement.textContent = `Tu ubicación actual es: ${address}`;
+                    })
+                    .catch(error => {
+                        console.error("Error obteniendo la dirección:", error);
+                    });
+            }, function(error) {
+                // Manejar errores de geolocalización
+                console.error("Error obteniendo la ubicación:", error.message);
+            });
+        });
+    </script>
+</body>
+</html>

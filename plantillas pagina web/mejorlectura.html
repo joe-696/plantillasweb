@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bienvenido</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <style>
+    /* Estilos personalizados */
+    body {
+      background-color: #0e0e0e;
+      color: #fff;
+      font-family: 'Arial', sans-serif;
+      overflow: hidden;
+    }
+
+    .jumbotron {
+      background-color: transparent;
+      padding: 100px 20px;
+      text-align: center;
+      border-radius: 0;
+    }
+
+    .btn-primary {
+      background-color: #ff6b6b;
+      border-color: #ff6b6b;
+      padding: 15px 50px;
+      font-size: 24px;
+      border-radius: 40px;
+    }
+
+    .btn-primary:hover {
+      background-color: #ff4f4f;
+      border-color: #ff4f4f;
+    }
+
+    .lead {
+      font-size: 24px;
+      margin-top: 30px;
+    }
+
+    .brand-logo {
+      max-width: 200px;
+      margin-bottom: 50px;
+    }
+
+    .animated-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom right, #e74c3c, #2c3e50, #3498db);
+      z-index: -1;
+      animation: animatedBackground 20s linear infinite alternate;
+    }
+
+    @keyframes animatedBackground {
+      0% {
+        background-position: 0% 50%;
+      }
+      100% {
+        background-position: 100% 50%;
+      }
+    }
+
+    .glow-text {
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 10px #fff, 0 0 20px #ff6b6b, 0 0 30px #ff6b6b, 0 0 40px #ff6b6b, 0 0 50px #ff6b6b, 0 0 60px #ff6b6b, 0 0 70px #ff6b6b;
+      }
+      to {
+        text-shadow: 0 0 20px #fff, 0 0 30px #ff4f4f, 0 0 40px #ff4f4f, 0 0 50px #ff4f4f, 0 0 60px #ff4f4f, 0 0 70px #ff4f4f, 0 0 80px #ff4f4f;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="jumbotron text-center">
+    <img src="https://via.placeholder.com/200" alt="Brand Logo" class="brand-logo animate__animated animate__fadeInDown">
+    <h1 class="display-4 glow-text">¡Bienvenido!</h1>
+    <div class="welcome-text animate__animated animate__fadeInUp animate__delay-2s">
+      <p class="lead">Gracias por visitar nuestra página.</p>
+      <p>Esperamos que te guste lo que tenemos para ofrecerte.</p>
+    </div>
+    <a class="btn btn-primary btn-lg animate__animated animate__fadeIn animate__delay-3s" href="#" role="button">¡Empecemos!</a>
+  </div>
+  
+  <div class="animated-background"></div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

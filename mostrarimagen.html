@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subir y mostrar imagen</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        #image-container {
+            margin-top: 50px;
+        }
+
+        #image-container img {
+            max-width: 300px;
+            max-height: 300px;
+            margin-bottom: 20px;
+        }
+
+        #btn-upload {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #btn-remove {
+            margin-top: 10px;
+            padding: 5px 10px;
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Subir y mostrar imagen</h1>
+
+    <div id="image-container">
+        <img id="uploaded-image" src="" alt="Imagen cargada">
+        <input type="file" id="file-input" style="display: none;">
+        <button id="btn-upload">Subir imagen</button>
+        <button id="btn-remove" style="display: none;">Eliminar imagen</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const fileInput = document.getElementById('file-input');
+            const uploadedImage = document.getElementById('uploaded-image');
+            const btnUpload = document.getElementById('btn-upload');
+            const btnRemove = document.getElementById('btn-remove');
+            let imageUrl = localStorage.getItem('uploadedImageUrl');
+
+            if (imageUrl) {
+                uploadedImage.src = imageUrl;
+                btnRemove.style.display = 'block';
+            }
+
+            btnUpload.addEventListener('click', function() {
+                fileInput.click();
+            });
+
+            fileInput.addEventListener('change', function(event) {
+                const file = event.target.files[0];
+                if (file) {
+                    uploadImage(file);
+                }
+            });
+
+            btnRemove.addEventListener('click', function() {
+                uploadedImage.src = '';
+                btnRemove.style.display = 'none';
+                localStorage.removeItem('uploadedImageUrl');
+            });
+
+            function uploadImage(file) {
+                const apiKey = '0adb8d5fa605b6e87afb744fe04a0fbd';
+                const formData = new FormData();
+                formData.append('image', file);
+
+                fetch('https://api.imgbb.com/1/upload?key=' + apiKey, {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    imageUrl = data.data.display_url;
+                    uploadedImage.src = imageUrl;
+                    btnRemove.style.display = 'block';
+                    localStorage.setItem('uploadedImageUrl', imageUrl);
+                })
+                .catch(error => console.error('Error:', error));
+            }
+        });
+    </script>
+</body>
+</html>

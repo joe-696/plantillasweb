@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bienvenido</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: Arial, sans-serif;
+    }
+
+    .jumbotron {
+      background-color: #007bff;
+      color: #fff;
+      border-radius: 20px;
+      padding: 50px;
+      margin: 100px auto;
+      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-primary {
+      background-color: #ffc107;
+      border-color: #ffc107;
+    }
+
+    .btn-primary:hover {
+      background-color: #ff9800;
+      border-color: #ff9800;
+    }
+
+    .card {
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+      margin-bottom: 30px;
+      padding: 20px;
+    }
+
+    .card-title {
+      color: #007bff;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .card-text {
+      color: #555;
+    }
+
+    .fade-in {
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .rotate {
+      animation: rotate 2s linear infinite;
+    }
+
+    @keyframes rotate {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="jumbotron text-center animate__animated animate__fadeIn">
+    <h1 class="display-4">¡Bienvenido!</h1>
+    <p class="lead">Gracias por visitar nuestra página.</p>
+    <hr class="my-4">
+    <p>Esperamos que te guste lo que tenemos para ofrecerte.</p>
+    <a class="btn btn-primary btn-lg" href="#" role="button">Explorar</a>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card fade-in">
+          <div class="card-body text-center">
+            <div class="rotate">🎉</div>
+            <h5 class="card-title">Productos exclusivos</h5>
+            <p class="card-text">Descubre nuestra selección de productos exclusivos y de alta calidad.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card fade-in">
+          <div class="card-body text-center">
+            <div class="rotate">💼</div>
+            <h5 class="card-title">Servicios personalizados</h5>
+            <p class="card-text">Ofrecemos servicios adaptados a tus necesidades y preferencias.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card fade-in">
+          <div class="card-body text-center">
+            <div class="rotate">🌟</div>
+            <h5 class="card-title">Experiencia única</h5>
+            <p class="card-text">Vive una experiencia única con nosotros y descubre algo nuevo cada día.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- jQuery, Popper.js, Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

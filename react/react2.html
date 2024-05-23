@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>React Spring Example</title>
+  <style>
+    /* Estilos adicionales */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    #loader {
+      width: 100px;
+      height: 100px;
+      border: 8px solid #f3f3f3;
+      border-top: 8px solid #3498db;
+      border-radius: 50%;
+      animation: spin 2s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <!-- Incluyendo ReactJS y React Spring desde CDNs -->
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://unpkg.com/react-spring@9/umd/react-spring.development.js"></script>
+
+  <script type="text/babel">
+    // Componente funcional que representa la aplicación
+    function App() {
+      const [loading, setLoading] = React.useState(true);
+
+      // Simulando una carga con un tiempo de espera
+      React.useEffect(() => {
+        const timeout = setTimeout(() => {
+          setLoading(false);
+        }, 3000); // Simula una carga de 3 segundos
+
+        return () => clearTimeout(timeout);
+      }, []);
+
+      return (
+        <div id="root">
+          {loading ? (
+            <div id="loader"></div>
+          ) : (
+            <h1>Carga completa</h1>
+          )}
+        </div>
+      );
+    }
+
+    // Renderizamos la aplicación en el elemento con id 'root'
+    ReactDOM.render(<App />, document.getElementById('root'));
+  </script>
+</body>
+</html>

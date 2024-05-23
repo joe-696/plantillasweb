@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tu Landing Page</title>
+    <style>
+        /* Reset de estilos */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header {
+            background: #333;
+            color: #fff;
+            padding: 20px 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .header nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        .header nav ul li {
+            margin-right: 20px;
+        }
+
+        .header nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        .header nav ul li a:hover {
+            color: #ffd700;
+        }
+
+        .hero {
+            background: url('hero-bg.jpg') center/cover no-repeat;
+            padding: 100px 0;
+            text-align: center;
+            color: #fff;
+        }
+
+        .hero__title {
+            margin-bottom: 20px;
+            font-size: 36px;
+        }
+
+        .hero__subtitle {
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #333;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #ffd700;
+        }
+
+        .features {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 32px;
+            margin-bottom: 40px;
+        }
+
+        .feature {
+            margin-bottom: 30px;
+        }
+
+        .feature__title {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .about {
+            background: #f9f9f9;
+            padding: 100px 0;
+        }
+
+        .about__description {
+            font-size: 18px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .contact {
+            padding: 100px 0;
+            background: #333;
+            color: #fff;
+        }
+
+        .contact__description {
+            font-size: 18px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .contact__form {
+            text-align: center;
+        }
+
+        .contact__input,
+        .contact__textarea {
+            display: block;
+            width: 100%;
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .contact__textarea {
+            height: 150px;
+        }
+
+        .footer {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .footer__copyright {
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <div class="container">
+        <h1>Tu Empresa</h1>
+        <nav>
+            <ul>
+                <li><a href="#features">Características</a></li>
+                <li><a href="#about">Acerca de</a></li>
+                <li><a href="#contact">Contacto</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<section id="hero" class="hero">
+    <div class="container">
+        <h2 class="hero__title">Bienvenido a nuestra página</h2>
+        <p class="hero__subtitle">Descubre los mejores productos y servicios para ti</p>
+        <a href="#features" class="btn">Descubre más</a>
+    </div>
+</section>
+
+<section id="features" class="features">
+    <div class="container">
+        <h2 class="section-title">Características</h2>
+        <div class="feature">
+            <h3 class="feature__title">Funcionalidad 1</h3>
+            <p class="feature__description">Descripción de la funcionalidad 1</p>
+        </div>
+        <div class="feature">
+            <h3 class="feature__title">Funcionalidad 2</h3>
+            <p class="feature__description">Descripción de la funcionalidad 2</p>
+        </div>
+        <div class="feature">
+            <h3 class="feature__title">Funcionalidad 3</h3>
+            <p class="feature__description">Descripción de la funcionalidad 3</p>
+        </div>
+    </div>
+</section>
+
+<section id="about" class="about">
+    <div class="container">
+        <h2 class="section-title">Acerca de</h2>
+        <p class="about__description">Somos una empresa comprometida con ofrecer soluciones innovadoras para nuestros clientes.</p>
+    </div>
+</section>
+
+<section id="contact" class="contact">
+    <div class="container">
+        <h2 class="section-title">Contacto</h2>
+        <p class="contact__description">Completa el formulario para contactarnos:</p>
+        <form id="contact-form" action="#" method="post" class="contact__form">
+            <input type="text" name="name" placeholder="Nombre" required class="contact__input">
+            <input type="email" name="email" placeholder="Email" required class="contact__input">
+            <textarea name="message" placeholder="Mensaje" required class="contact__textarea"></textarea>
+            <button type="submit" class="btn">Enviar Mensaje</button>
+        </form>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <p class="footer__copyright">Derechos Reservados &copy; 2024 Tu Empresa</p>
+    </div>
+</footer>
+
+<script>
+    // Puedes añadir aquí tu código JavaScript según tus necesidades
+</script>
+
+</body>
+</html>

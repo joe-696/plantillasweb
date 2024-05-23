@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bienvenido</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <style>
+    /* Estilos personalizados */
+    body {
+      background-color: #f8f9fa;
+    }
+
+    .jumbotron {
+      background-color: #007bff;
+      color: #fff;
+      border-radius: 20px;
+      padding: 50px;
+      margin-top: 100px;
+      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-primary {
+      background-color: #ffc107;
+      border-color: #ffc107;
+    }
+
+    .btn-primary:hover {
+      background-color: #ff9800;
+      border-color: #ff9800;
+    }
+
+    /* Estilos para la animación de mecanografiado */
+    .typewriter-text {
+      overflow: hidden; /* Para que el texto no se desborde */
+      border-right: .15em solid orange; /* Cursor de mecanografiado */
+      white-space: nowrap; /* Para que el texto se muestre en una sola línea */
+      margin: 0 auto; /* Centrar el texto */
+      letter-spacing: .15em; /* Espacio entre letras */
+      animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite; /* Animación de mecanografiado y cursor */
+    }
+
+    /* Animación de mecanografiado */
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    /* Cursor de mecanografiado */
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: orange; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="jumbotron text-center animate__animated animate__fadeIn">
+    <h1 class="display-4">¡Bienvenido!</h1>
+    <p class="lead typewriter-text">Gracias por visitar nuestra página.</p>
+    <hr class="my-4">
+    <p class="typewriter-text">Esperamos que te guste lo que tenemos para ofrecerte.</p>
+    <a class="btn btn-primary btn-lg animate__animated animate__fadeIn" href="#" role="button">Explorar</a>
+  </div>
+
+  <!-- jQuery, Popper.js, Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

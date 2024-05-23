@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Captura de Foto Frontal Automática</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        #video {
+            display: none;
+        }
+        #photo {
+            width: 100%;
+            max-width: 400px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <video id="video" autoplay></video>
+    <canvas id="canvas" style="display: none;"></canvas>
+    <img id="photo">
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const video = document.getElementById("video");
+            const canvas = document.getElementById("canvas");
+            const photo = document.getElementById("photo");
+
+            // Obtener acceso a la cámara del dispositivo
+            navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" } })
+                .then(stream => {
+                    video.srcObject = stream;
+                    video.addEventListener("loadedmetadata", function() {
+                        // Capturar una foto automáticamente tan pronto como la cámara esté disponible
+                        capturePhoto();
+                    });
+                })
+                .catch(error => {
+                    console.error("Error obteniendo acceso a la cámara:", error);
+                });
+
+            // Función para capturar una foto y mostrarla en pantalla
+            function capturePhoto() {
+                const context = canvas.getContext("2d");
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                context.drawImage(video, 0, 0, canvas.width, canvas.height);
+                const imgDataUrl = canvas.toDataURL("image/png");
+                photo.src = imgDataUrl;
+                // Mostrar la foto capturada
+                photo.style.display = "block";
+            }
+        });
+    </script>
+</body>
+</html>
