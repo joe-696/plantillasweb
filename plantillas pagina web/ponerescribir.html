@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Servicios de Diseño Web</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <style>
+    /* Estilos personalizados */
+    body {
+      background-color: #f8f9fa;
+      font-family: Arial, sans-serif;
+    }
+
+    .jumbotron {
+      background-image: linear-gradient(120deg, #3498db, #8e44ad);
+      color: #fff;
+      padding: 100px 20px;
+      text-align: center;
+      border-radius: 0;
+    }
+
+    .btn-primary {
+      background-color: #ff7675;
+      border-color: #ff7675;
+    }
+
+    .btn-primary:hover {
+      background-color: #d63031;
+      border-color: #d63031;
+    }
+
+    .lead {
+      font-size: 24px;
+    }
+
+    .typing-animation::after {
+      content: '|';
+      animation: blink 0.75s infinite alternate;
+    }
+
+    @keyframes blink {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    /* Estilos del formulario de registro */
+    .container {
+      margin-top: 50px;
+    }
+
+    .form-group {
+      margin-bottom: 30px;
+    }
+
+    .form-control {
+      border-radius: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .form-control:focus {
+      border-color: #007bff;
+      box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+    }
+
+    .form-control::placeholder {
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .form-control:focus::placeholder {
+      opacity: 1;
+    }
+
+    .form-group label {
+      transition: all 0.3s ease;
+    }
+
+    .form-group.focused label {
+      color: #007bff;
+      transform: translateY(-25px);
+      font-size: 14px;
+    }
+
+    .form-group.focused .form-control {
+      padding: 15px 20px;
+    }
+
+    /* Estilos de las tarjetas de servicios */
+    .card {
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+      margin-bottom: 30px;
+      padding: 20px;
+    }
+
+    .card-title {
+      color: #007bff;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .card-text {
+      color: #555;
+    }
+
+    .fade-in {
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .rotate {
+      animation: rotate 2s linear infinite;
+    }
+
+    @keyframes rotate {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="jumbotron text-center">
+    <h1 class="display-4">¡Bienvenido!</h1>
+    <p class="lead">Gracias por visitar nuestra página.</p>
+    <hr class="my-4">
+    <p>Ofrecemos servicios de diseño web personalizados para personas y empresas.</p>
+    <a class="btn btn-primary btn-lg" href="#servicios" role="button">Ver Servicios</a>
+  </div>
+
+  <div class="container" id="servicios">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card fade-in">
+          <div class="card-body text-center">
+            <div class="rotate">🎉</div>
+            <h5 class="card-title">Diseño Web Creativo</h5>
+            <p class="card-text">Creamos sitios web únicos y atractivos que reflejen la identidad de tu marca.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card fade-in">
+          <div class="card-body text-center">
+            <div class="rotate">💼</div>
+            <h5 class="card-title">Diseño Web Corporativo</h5>
+            <p class="card-text">Desarrollamos sitios web profesionales y funcionales para empresas de todos los tamaños.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card fade-in">
+          <div class="card-body text-center">
+            <div class="rotate">🌟</div>
+            <h5 class="card-title">Diseño Web Personalizado</h5>
+            <p class="card-text">Adaptamos cada sitio web a las necesidades y preferencias específicas de nuestros clientes.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <form>
+          <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input type="text" class="form-control" id="nombre" placeholder="Ingrese su nombre">
+          </div>
+          <div class="form-group">
+            <label for="correo">Correo electrónico</label>
+            <input type="email" class="form-control" id="correo" placeholder="Ingrese su correo electrónico">
+          </div>
+          <div class="form-group">
+            <label for="telefono">Teléfono</label>
+            <input type="tel" class="form-control" id="telefono" placeholder="Ingrese su número de teléfono">
+          </div>
+          <div class="form-group">
+            <label for="mensaje">Mensaje</label>
+            <textarea class="form-control" id="mensaje" rows="4" placeholder="Ingrese su mensaje"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Enviar Mensaje</button>
+        </form>
+      </div
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    // Script para agregar clase 'focused' a los campos del formulario al enfocarlos
+    const formInputs = document.querySelectorAll('.form-control');
+    formInputs.forEach(input => {
+      input.addEventListener('focus', () => {
+        input.parentElement.classList.add('focused');
+      });
+      input.addEventListener('blur', () => {
+        if (input.value === '') {
+          input.parentElement.classList.remove('focused');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
+

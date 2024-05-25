@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página Avanzada</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- React CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/react@17/umd/react.production.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/react-dom@17/umd/react-dom.production.min.js"></script>
+  <!-- GSAP Animation Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+  <!-- Estilos personalizados -->
+  <style>
+    body {
+      background-color: #f0f0f0;
+      font-family: 'Arial', sans-serif;
+      overflow-x: hidden;
+    }
+
+    .container {
+      margin-top: 50px;
+    }
+
+    .section {
+      padding: 100px 0;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-title {
+      font-size: 36px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .section-subtitle {
+      font-size: 18px;
+      color: #777;
+    }
+
+    .btn-primary {
+      background-color: #007bff;
+      border-color: #007bff;
+      font-size: 18px;
+      padding: 12px 40px;
+      border-radius: 30px;
+    }
+
+    .btn-primary:hover {
+      background-color: #0056b3;
+      border-color: #0056b3;
+    }
+
+    .card {
+      background-color: #fff;
+      border-radius: 20px;
+      box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+      margin-bottom: 30px;
+      padding: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-title {
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .card-text {
+      color: #666;
+    }
+
+    .card-icon {
+      font-size: 48px;
+      color: #007bff;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="section section-header">
+      <h1 class="section-title">Página Avanzada</h1>
+      <p class="section-subtitle">Explora las funcionalidades avanzadas de esta página.</p>
+      <a href="#features" class="btn btn-primary">Descubrir</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="section" id="features">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card text-center">
+            <div class="card-icon">🚀</div>
+            <h3 class="card-title">Tecnología Avanzada</h3>
+            <p class="card-text">Descubre las últimas tecnologías utilizadas en esta página.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card text-center">
+            <div class="card-icon">🎨</div>
+            <h3 class="card-title">Diseño Innovador</h3>
+            <p class="card-text">Explora un diseño moderno y atractivo que mejora la experiencia del usuario.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card text-center">
+            <div class="card-icon">⚙️</div>
+            <h3 class="card-title">Funcionalidades Avanzadas</h3>
+            <p class="card-text">Disfruta de funciones interactivas y dinámicas que hacen que esta página sea única.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Animación al cargar la página
+    gsap.from('.section-header', { opacity: 0, duration: 1, y: -50, ease: 'power4.out', delay: 0.5 });
+    gsap.from('.card', { opacity: 0, duration: 1, y: 50, stagger: 0.2, ease: 'power4.out', delay: 1 });
+  </script>
+
+</body>
+</html>

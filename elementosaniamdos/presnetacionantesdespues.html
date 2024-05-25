@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Presentación Interactiva</title>
+  <!-- React -->
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <!-- Babel para JSX -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <!-- Estilos personalizados -->
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .presentation {
+      width: 600px;
+      background-color: #fff;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .title {
+      font-size: 36px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 30px;
+    }
+
+    .content {
+      font-size: 18px;
+      color: #666;
+      line-height: 1.6;
+    }
+
+    .button {
+      background-color: #007bff;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+<div id="root" class="container"></div>
+
+<script type="text/babel">
+  const Presentation = () => {
+    const [page, setPage] = React.useState(1);
+
+    const nextPage = () => {
+      setPage(page + 1);
+    };
+
+    const prevPage = () => {
+      setPage(page - 1);
+    };
+
+    return (
+      <div className="presentation">
+        {page === 1 && (
+          <>
+            <h1 className="title">¡Bienvenido a nuestra presentación interactiva!</h1>
+            <p className="content">En esta presentación, exploraremos algunas características avanzadas de React y CSS para crear experiencias atractivas y modernas.</p>
+            <button className="button" onClick={nextPage}>Siguiente</button>
+          </>
+        )}
+        {page === 2 && (
+          <>
+            <h1 className="title">Componentes React</h1>
+            <p className="content">React es una biblioteca de JavaScript para construir interfaces de usuario. Utiliza componentes reutilizables que pueden contener su propio estado y comportamiento.</p>
+            <button className="button" onClick={prevPage}>Anterior</button>
+            <button className="button" onClick={nextPage}>Siguiente</button>
+          </>
+        )}
+        {page === 3 && (
+          <>
+            <h1 className="title">CSS Avanzado</h1>
+            <p className="content">CSS ofrece muchas posibilidades para estilizar elementos y crear animaciones. Con herramientas como Flexbox y Grid, podemos diseñar diseños complejos de manera más eficiente.</p>
+            <button className="button" onClick={prevPage}>Anterior</button>
+            <button className="button" onClick={nextPage}>Siguiente</button>
+          </>
+        )}
+        {page === 4 && (
+          <>
+            <h1 className="title">Interacciones Dinámicas</h1>
+            <p className="content">Al combinar React y CSS, podemos crear interacciones dinámicas que responden a las acciones del usuario, como clics y desplazamientos.</p>
+            <button className="button" onClick={prevPage}>Anterior</button>
+            <button className="button" onClick={nextPage}>Siguiente</button>
+          </>
+        )}
+        {page === 5 && (
+          <>
+            <h1 className="title">¡Gracias por tu atención!</h1>
+            <p className="content">Esperamos que hayas disfrutado de nuestra presentación. Si tienes alguna pregunta o comentario, ¡no dudes en hacérnoslo saber!</p>
+            <button className="button" onClick={prevPage}>Anterior</button>
+          </>
+        )}
+      </div>
+    );
+  };
+
+  ReactDOM.render(<Presentation />, document.getElementById('root'));
+</script>
+
+</body>
+</html>

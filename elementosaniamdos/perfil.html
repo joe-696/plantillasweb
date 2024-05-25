@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfil de Usuario</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <style>
+    /* Estilos personalizados */
+    body {
+      background-color: #f8f9fa;
+      font-family: 'Arial', sans-serif;
+    }
+
+    .profile-card {
+      background-color: #fff;
+      border-radius: 20px;
+      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+      padding: 50px;
+      margin: 100px auto;
+      max-width: 600px;
+    }
+
+    .profile-pic {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      margin: 0 auto 30px;
+      box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .profile-info h2 {
+      color: #007bff;
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    .profile-info p {
+      color: #555;
+      font-size: 18px;
+    }
+
+    .profile-info .btn-primary {
+      background-color: #007bff;
+      border-color: #007bff;
+      font-size: 20px;
+      border-radius: 30px;
+      padding: 12px 30px;
+      margin-top: 30px;
+      transition: all 0.3s ease;
+    }
+
+    .profile-info .btn-primary:hover {
+      background-color: #0056b3;
+      border-color: #0056b3;
+      transform: scale(1.1);
+    }
+
+    .animate-slide {
+      animation: slideInRight 1s ease;
+    }
+
+    @keyframes slideInRight {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container profile-card animate__animated animate__fadeIn">
+    <div class="text-center">
+      <img src="https://via.placeholder.com/200" alt="Profile Picture" class="profile-pic">
+    </div>
+    <div class="profile-info text-center">
+      <h2 class="animate-slide">Nombre de Usuario</h2>
+      <p class="animate-slide">Email: usuario@example.com</p>
+      <p class="animate-slide">Ciudad: Ciudad de Ejemplo</p>
+      <button class="btn btn-primary animate-slide">Editar Perfil</button>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

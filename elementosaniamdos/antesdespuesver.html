@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Presentación Interactiva</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- React y ReactDOM -->
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <!-- Babel para compilar JSX -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    /* Estilos personalizados */
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .slide {
+      display: none;
+    }
+
+    .active {
+      display: block;
+    }
+
+    .btn {
+      margin-top: 20px;
+    }
+
+    .btn-primary {
+      background-color: #007bff;
+      border-color: #007bff;
+    }
+
+    .btn-primary:hover {
+      background-color: #0056b3;
+      border-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const slides = [
+      { title: 'Bienvenido', content: 'Esta es una presentación interactiva creada con React.' },
+      { title: 'Slide 1', content: 'Aquí puedes agregar tu contenido personalizado.' },
+      { title: 'Slide 2', content: 'Haz clic en los botones para avanzar o retroceder en la presentación.' },
+      { title: 'Slide 3', content: '¡Diviértete explorando las posibilidades!' }
+    ];
+
+    class Slideshow extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {
+          currentSlide: 0
+        };
+      }
+
+      goToNextSlide = () => {
+        this.setState((prevState) => ({
+          currentSlide: (prevState.currentSlide + 1) % slides.length
+        }));
+      };
+
+      goToPreviousSlide = () => {
+        this.setState((prevState) => ({
+          currentSlide: (prevState.currentSlide - 1 + slides.length) % slides.length
+        }));
+      };
+
+      render() {
+        const { currentSlide } = this.state;
+
+        return (
+          <div className="container">
+            <h1>{slides[currentSlide].title}</h1>
+            <p>{slides[currentSlide].content}</p>
+            <div>
+              <button className="btn btn-primary mr-2" onClick={this.goToPreviousSlide}>Anterior</button>
+              <button className="btn btn-primary" onClick={this.goToNextSlide}>Siguiente</button>
+            </div>
+          </div>
+        );
+      }
+    }
+
+    ReactDOM.render(<Slideshow />, document.getElementById('root'));
+  </script>
+</body>
+</html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bienvenido a Nuestro Negocio de Páginas Web</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: Arial, sans-serif;
+    }
+
+    .jumbotron {
+      background-image: linear-gradient(120deg, #3498db, #8e44ad);
+      color: #fff;
+      padding: 100px 20px;
+      text-align: center;
+      border-radius: 0;
+    }
+
+    .btn-primary {
+      background-color: #ff7675;
+      border-color: #ff7675;
+    }
+
+    .btn-primary:hover {
+      background-color: #d63031;
+      border-color: #d63031;
+    }
+
+    .lead {
+      font-size: 24px;
+    }
+
+    .typing-animation::after {
+      content: '|';
+      animation: blink 0.75s infinite alternate;
+    }
+
+    @keyframes blink {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    .form-group {
+      margin-bottom: 30px;
+    }
+
+    .form-control {
+      border-radius: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .form-control:focus {
+      border-color: #007bff;
+      box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+    }
+
+    .form-control::placeholder {
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .form-control:focus::placeholder {
+      opacity: 1;
+    }
+
+    .form-group label {
+      transition: all 0.3s ease;
+    }
+
+    .form-group.focused label {
+      color: #007bff;
+      transform: translateY(-25px);
+      font-size: 14px;
+    }
+
+    .form-group.focused .form-control {
+      padding: 15px 20px;
+    }
+
+    .fade-in {
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .rotate {
+      animation: rotate 2s linear infinite;
+    }
+
+    @keyframes rotate {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .container-cards {
+      margin-top: 50px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="jumbotron text-center">
+    <h1 class="display-4"><span class="typed-text"></span><span class="typing-animation"></span></h1>
+    <p class="lead animate__animated animate__fadeInDownBig">Nos especializamos en crear páginas web para tu negocio.</p>
+    <hr class="my-4">
+    <p class="animate__animated animate__fadeInUpBig">Descubre todo lo que podemos hacer para potenciar tu presencia en línea.</p>
+    <a class="btn btn-primary btn-lg animate__animated animate__fadeIn" href="#contacto" role="button">Contáctanos</a>
+  </div>
+
+  <div class="container container-cards">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card fade-in">
+          <div class="card-body text-center">
+            <div class="rotate">🎉</div>
+            <h5 class="card-title">Diseños Personalizados</h5>
+            <p class="card-text">Creamos diseños únicos y adaptados a tus necesidades específicas.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card fade-in">
+          <div class="card-body text-center">
+            <div class="rotate">💼</div>
+            <h5 class="card-title">Servicios Profesionales</h5>
+            <p class="card-text">Ofrecemos servicios de alta calidad para asegurar el éxito de tu sitio web.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card fade-in">
+          <div class="card-body text-center">
+            <div class="rotate">🌟</div>
+            <h5 class="card-title">Experiencia Única</h5>
+            <p class="card-text">Te proporcionamos una experiencia única y resultados que destacan.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" id="contacto">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <h2 class="text-center my-4">Formulario de Contacto</h2>
+        <form>
+          <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input type="text" class="form-control" id="nombre" placeholder="Ingrese su nombre">
+          </div>
+          <div class="form-group">
+            <label for="correo">Correo electrónico</label>
+            <input type="email" class="form-control" id="correo" placeholder="Ingrese su correo electrónico">
+          </div>
+          <div class="form-group">
+            <label for="mensaje">Mensaje</label>
+            <textarea class="form-control" id="mensaje" rows="3" placeholder="Escriba su mensaje"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Enviar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script>
+    // Simulación de efecto de escritura
+    const textArray = ["Bienvenido", "¡Potencia tu negocio!", "con una pagina web, evoluciona tu emprendimiento"];
+    let textIndex = 0;
+    let letterIndex = 0;
+    let typingTimeout;
+
+    function typeText() {
+      if (letterIndex < textArray[textIndex].length) {
+        document.querySelector('.typed-text').textContent += textArray[textIndex].charAt(letterIndex);
+        letterIndex++;
+        typingTimeout = setTimeout(typeText, 100);
+      } else {
+        clearTimeout(typingTimeout);
+        setTimeout(eraseText, 1500);
+      }
+    }
+
+    function eraseText() {
+      if (letterIndex > 0) {
+        document.querySelector('.typed-text').textContent = textArray[textIndex].substring(0, letterIndex - 1);
+        letterIndex--;
+        typingTimeout = setTimeout(eraseText, 50);
+      } else {
+        clearTimeout(typingTimeout);
+        textIndex = (textIndex + 1) % textArray.length;
+        setTimeout(typeText, 500);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(typeText, 500);
+    });
+
+    // Script para agregar clase 'focused' a los campos del formulario al enfocarlos
+    const formInputs = document.querySelectorAll('.form-control');
+    formInputs.forEach(input => {
+      input.addEventListener('focus', () => {
+        input.parentElement.classList.add('focused');
+      });
+      input.addEventListener('blur', () => {
+        if (input.value === '') {
+          input.parentElement.classList.remove('focused');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

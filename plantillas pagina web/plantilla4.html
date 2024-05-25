@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página Moderna y Estética</title>
+  <!-- React.js CDN -->
+  <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <style>
+    body {
+      background-color: #f9f9f9;
+      font-family: 'Arial', sans-serif;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 50px auto;
+    }
+
+    .section {
+      padding: 50px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+      margin-bottom: 50px;
+    }
+
+    .title {
+      font-size: 36px;
+      font-weight: bold;
+      margin-bottom: 30px;
+    }
+
+    .subtitle {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .btn-primary {
+      background-color: #007bff;
+      border-color: #007bff;
+      font-size: 18px;
+      border-radius: 30px;
+      padding: 10px 30px;
+      margin-top: 20px;
+    }
+
+    .btn-primary:hover {
+      background-color: #0056b3;
+      border-color: #0056b3;
+    }
+
+    .animated-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: linear-gradient(to bottom right, #ff4f4f, #3498db, #2ecc71);
+      animation: animatedBackground 20s linear infinite alternate;
+    }
+
+    @keyframes animatedBackground {
+      0% {
+        background-position: 0% 50%;
+      }
+      100% {
+        background-position: 100% 50%;
+      }
+    }
+
+    .animated-title {
+      animation: slideInDown 1s ease;
+    }
+
+    .animated-text {
+      animation: slideInUp 1s ease;
+    }
+
+    .animated-button {
+      animation: fadeIn 1s ease;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="animated-bg"></div>
+
+  <div class="container">
+    <div class="section text-center">
+      <h1 class="title animated-title">¡Bienvenido a una Experiencia Moderna!</h1>
+      <p class="subtitle animated-text">Explora nuestras increíbles características:</p>
+      <button class="btn btn-primary animated-button">Empezar Ahora</button>
+    </div>
+
+    <div class="section text-center">
+      <h2 class="title animated-title">Característica Destacada</h2>
+      <p class="subtitle animated-text">Descubre lo que tenemos para ti</p>
+      <button class="btn btn-primary animated-button">Más Información</button>
+    </div>
+
+    <div class="section text-center">
+      <h2 class="title animated-title">Otra Característica Increíble</h2>
+      <p class="subtitle animated-text">No te lo pierdas</p>
+      <button class="btn btn-primary animated-button">Ver Detalles</button>
+    </div>
+  </div>
+
+  <script>
+    // React Component Example
+    const App = () => {
+      return (
+        <div className="container">
+          <div className="section text-center">
+            <h2 className="title">Componente React: Menú Desplegable</h2>
+            <p className="subtitle">Selecciona una opción:</p>
+            <div className="dropdown">
+              <button className="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Opciones
+              </button>
+              <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a className="dropdown-item" href="#">Opción 1</a>
+                <a className="dropdown-item" href="#">Opción 2</a>
+                <a className="dropdown-item" href="#">Opción 3</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    // Render React Component
+    ReactDOM.render(<App />, document.getElementById('root'));
+  </script>
+
+  <!-- Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfil de Usuario</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: 'Arial', sans-serif;
+      overflow: hidden;
+    }
+
+    .profile-container {
+      margin-top: 50px;
+    }
+
+    .profile-card {
+      background-color: #fff;
+      border-radius: 20px;
+      box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+    }
+
+    .profile-img {
+      border-radius: 50%;
+      max-width: 150px;
+      margin-bottom: 20px;
+      border: 5px solid #007bff;
+    }
+
+    .profile-name {
+      font-size: 24px;
+      font-weight: bold;
+      color: #007bff;
+      margin-bottom: 10px;
+    }
+
+    .profile-info {
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    .profile-info span {
+      font-weight: bold;
+    }
+
+    .profile-bio {
+      font-size: 18px;
+    }
+
+    .profile-edit-button {
+      background-color: #007bff;
+      border: none;
+      border-radius: 20px;
+      padding: 10px 20px;
+      color: #fff;
+      font-size: 18px;
+      transition: all 0.3s ease;
+    }
+
+    .profile-edit-button:hover {
+      background-color: #0056b3;
+    }
+
+    .animate-on-hover:hover {
+      animation-name: bounceIn;
+      animation-duration: 0.5s;
+    }
+
+    @keyframes bounceIn {
+      from {
+        transform: scale(0.8);
+      }
+      to {
+        transform: scale(1);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container profile-container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="profile-card text-center animate__animated animate__fadeIn">
+          <img src="https://via.placeholder.com/150" alt="Profile Picture" class="profile-img animate-on-hover">
+          <h2 class="profile-name animate-on-hover">John Doe</h2>
+          <div class="profile-info animate-on-hover">
+            <p><span>Edad:</span> 30 años</p>
+            <p><span>Ubicación:</span> Ciudad de México</p>
+            <p><span>Profesión:</span> Desarrollador Web</p>
+          </div>
+          <p class="profile-bio animate-on-hover">Apasionado por la tecnología y la programación. Siempre en busca de nuevos desafíos.</p>
+          <button class="profile-edit-button animate-on-hover">Editar Perfil</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
