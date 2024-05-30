@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD con Firebase Realtime Database</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Estilos adicionales */
+        #userList {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">CRUD con Firebase Realtime Database</h1>
+        
+        <!-- Formulario para agregar/actualizar usuarios -->
+        <form id="userForm" class="mt-4">
+            <div class="mb-3">
+                <input type="text" id="userId" class="form-control" placeholder="ID del Usuario" required>
+            </div>
+            <div class="mb-3">
+                <input type="text" id="userName" class="form-control" placeholder="Nombre del Usuario" required>
+            </div>
+            <div class="mb-3">
+                <input type="email" id="userEmail" class="form-control" placeholder="Email del Usuario" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Guardar Usuario</button>
+        </form>
+
+        <!-- Input para buscar usuarios -->
+        <input type="text" id="searchInput" class="form-control mt-4" placeholder="Buscar por Nombre o Email">
+
+        <h2 class="mt-5">Lista de Usuarios</h2>
+        <ul id="userList" class="list-group"></ul>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Firebase JS -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getDatabase, ref, set, onValue, remove, query, orderByChild } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+        // Configuración de Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyB0jN5Vbw2s22i6JMFzXCf1FFZkTKPgMso",
+            authDomain: "base-de-datos-d58c0.firebaseapp.com",
+            databaseURL: "https://base-de-datos-d58c0-default-rtdb.firebaseio.com",
+            projectId: "base-de-datos-d58c0",
+            storageBucket: "base-de-datos-d58c0.appspot.com",
+            messagingSenderId: "599665961222",
+            appId: "1:599665961222:web:9e5f74112f3e1c7d795687"
+        };
+
+        // Inicializa Firebase
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+
+        // Función para escribir datos en la base de datos
+        function escribirDatos(usuarioId, nombre, email) {
+            set(ref(database, 'usuarios/' + usuarioId), {
+                nombre: nombre,
+                email: email
+            });
+        }
+
+        // Función para leer datos de la base de datos
+        function leerDatos() {
+            const usuariosRef = ref(database, 'usuarios');
+            onValue(usuariosRef, (snapshot) => {
+                const data = snapshot.val();
+                actualizarListaUsuarios(data);
+            });
+        }
+
+        // Función para eliminar datos de la base de datos
+        function eliminarDatos(usuarioId) {
+            const usuarioRef = ref(database, 'usuarios/' + usuarioId);
+            remove(usuarioRef);
+        }
+
+        // Función para actualizar la lista de usuarios en la página
+        function actualizarListaUsuarios(data) {
+            const userList = document.getElementById('userList');
+            userList.innerHTML = ''; // Limpiar la lista actual
+            for (const usuarioId in data) {
+                const usuario = data[usuarioId];
+                const li = document.createElement('li');
+                li.className = "list-group-item";
+                li.textContent = `${usuarioId}: ${usuario.nombre} (${usuario.email}) `;
+                const deleteButton = document.createElement('button');
+                deleteButton.className = "btn btn-danger btn-sm float-end";
+                deleteButton.textContent = 'Eliminar';
+                deleteButton.onclick = () => eliminarDatos(usuarioId);
+                li.appendChild(deleteButton);
+                userList.appendChild(li);
+            }
+        }
+
+        // Función para buscar usuarios por nombre o email
+        function buscarUsuarios(queryText) {
+            const usuariosRef = ref(database, 'usuarios');
+            const queryRef = query(usuariosRef, orderByChild('nombre'));
+            onValue(queryRef, (snapshot) => {
+                const data = snapshot.val();
+                const filteredUsers = filterUsers(data, queryText);
+                actualizarListaUsuarios(filteredUsers);
+            });
+        }
+
+        // Función para filtrar usuarios por nombre o email
+        function filterUsers(data, queryText) {
+            const filteredUsers = {};
+            for (const usuarioId in data) {
+                const usuario = data[usuarioId];
+                if (usuario.nombre.toLowerCase().includes(queryText.toLowerCase()) || usuario.email.toLowerCase().includes(queryText.toLowerCase())) {
+                    filteredUsers[usuarioId] = usuario;
+                }
+            }
+            return filteredUsers;
+        }
+
+        // Manejar el evento de envío del formulario
+        document.getElementById('userForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const usuarioId = document.getElementById('userId').value;
+            const nombre = document.getElementById('userName').value;
+            const email = document.getElementById('userEmail').value;
+            escribirDatos(usuarioId, nombre, email);
+            document.getElementById('userForm').reset(); // Limpiar el formulario
+        });
+
+        // Manejar el evento de entrada en el campo de búsqueda
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            const searchText = e.target.value.trim();
+            if (searchText === '') {
+                leerDatos(); // Si el campo está vacío, mostrar todos los usuarios
+            } else {
+                buscarUsuarios(searchText); // Si hay texto, buscar usuarios que coincidan con el texto
+            }
+        });
+
+        // Leer los datos al cargar la página
+        leerDatos();
+    </script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Botón Llamativo</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+
+        .btn-nueva-publicacion {
+            font-size: 18px;
+            font-weight: bold;
+            color: #fff;
+            background: linear-gradient(45deg, #ff6b6b, #f06595, #845ec2, #ffc75f, #ff9671);
+            background-size: 300%;
+            border: none;
+            border-radius: 50px;
+            padding: 15px 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.5s;
+            animation: gradient 3s ease infinite;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-nueva-publicacion:hover {
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+            transform: scale(1.05);
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+    </style>
+</head>
+<body>
+    <button class="btn-nueva-publicacion">Nueva Publicación</button>
+</body>
+</html>

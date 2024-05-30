@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CRUD con Firebase Realtime Database</title>
+</head>
+<body>
+    <h1>CRUD con Firebase Realtime Database</h1>
+    
+    <!-- Formulario para agregar/actualizar datos -->
+    <form id="userForm">
+        <input type="text" id="userId" placeholder="ID del Usuario" required>
+        <input type="text" id="userName" placeholder="Nombre del Usuario" required>
+        <input type="email" id="userEmail" placeholder="Email del Usuario" required>
+        <button type="submit">Guardar Usuario</button>
+    </form>
+
+    <h2>Lista de Usuarios</h2>
+    <ul id="userList"></ul>
+
+    <!-- Agrega los scripts de Firebase al final del body -->
+    <script type="module">
+        // Importa las funciones necesarias del SDK de Firebase
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getDatabase, ref, set, get, onValue, remove } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+        // Configuración de Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyB0jN5Vbw2s22i6JMFzXCf1FFZkTKPgMso",
+            authDomain: "base-de-datos-d58c0.firebaseapp.com",
+            databaseURL: "https://base-de-datos-d58c0-default-rtdb.firebaseio.com",
+            projectId: "base-de-datos-d58c0",
+            storageBucket: "base-de-datos-d58c0.appspot.com",
+            messagingSenderId: "599665961222",
+            appId: "1:599665961222:web:9e5f74112f3e1c7d795687"
+        };
+
+        // Inicializa Firebase
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+
+        // Función para escribir datos en la base de datos
+        function escribirDatos(usuarioId, nombre, email) {
+            set(ref(database, 'usuarios/' + usuarioId), {
+                nombre: nombre,
+                email: email
+            });
+        }
+
+        // Función para leer datos de la base de datos
+        function leerDatos() {
+            const usuariosRef = ref(database, 'usuarios');
+            onValue(usuariosRef, (snapshot) => {
+                const data = snapshot.val();
+                actualizarListaUsuarios(data);
+            });
+        }
+
+        // Función para eliminar datos de la base de datos
+        function eliminarDatos(usuarioId) {
+            const usuarioRef = ref(database, 'usuarios/' + usuarioId);
+            remove(usuarioRef);
+        }
+
+        // Función para actualizar la lista de usuarios en la página
+        function actualizarListaUsuarios(data) {
+            const userList = document.getElementById('userList');
+            userList.innerHTML = ''; // Limpiar la lista actual
+            for (const usuarioId in data) {
+                const usuario = data[usuarioId];
+                const li = document.createElement('li');
+                li.textContent = `${usuarioId}: ${usuario.nombre} (${usuario.email}) `;
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Eliminar';
+                deleteButton.onclick = () => eliminarDatos(usuarioId);
+                li.appendChild(deleteButton);
+                userList.appendChild(li);
+            }
+        }
+
+        // Manejar el evento de envío del formulario
+        document.getElementById('userForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const usuarioId = document.getElementById('userId').value;
+            const nombre = document.getElementById('userName').value;
+            const email = document.getElementById('userEmail').value;
+            escribirDatos(usuarioId, nombre, email);
+            document.getElementById('userForm').reset(); // Limpiar el formulario
+        });
+
+        // Leer los datos al cargar la página
+        leerDatos();
+    </script>
+</body>
+</html>

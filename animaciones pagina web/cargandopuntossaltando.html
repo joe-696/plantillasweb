@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spinner Animado</title>
+  <style>
+    /* Estilos personalizados */
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f8f9fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .spinner-container {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .spinner-text {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .spinner-dots {
+      display: flex;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      background-color: #007bff;
+      border-radius: 50%;
+      margin: 0 5px;
+      animation: bounce 1s infinite;
+      animation-delay: calc(0.1s * var(--delay));
+    }
+
+    @keyframes bounce {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+      100% { transform: translateY(0); }
+    }
+
+    .spinner {
+      display: none; /* Ocultamos el círculo */
+    }
+  </style>
+</head>
+<body>
+
+<div class="spinner-container">
+  <div class="spinner-text">Por favor, espere</div>
+  <div class="spinner-dots">
+    <div class="dot" style="--delay: 1;"></div>
+    <div class="dot" style="--delay: 2;"></div>
+    <div class="dot" style="--delay: 3;"></div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -3,48 +3,56 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bienvenido</title>
+  <title>INCUBA UNAS</title>
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <!-- Animate.css -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
   <style>
+    /* Estilos personalizados */
     body {
-      background-color: #f8f9fa;
+      background-color: #ffffff; /* Verde claro */
       font-family: Arial, sans-serif;
+      position: relative;
     }
 
     .jumbotron {
-      background-color: #007bff;
+      background-color: #15096d; /* Gris oscuro */
       color: #fff;
       border-radius: 20px;
       padding: 50px;
-      margin: 100px auto;
+      margin: 50px auto 100px auto; /* Reducir el margen inferior */
       box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
     }
 
     .btn-primary {
-      background-color: #ffc107;
-      border-color: #ffc107;
+      background-color: #069658; /* Morado */
+      border-color: #6f42c1;
     }
 
     .btn-primary:hover {
-      background-color: #ff9800;
-      border-color: #ff9800;
+      background-color: #563d7c; /* Morado oscuro */
+      border-color: #563d7c;
     }
 
     .card {
-      background-color: #fff;
+      background-color: #69c4a7; /* Color de las tarjetas */
       border-radius: 10px;
       box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
       margin-bottom: 30px;
       padding: 20px;
     }
 
+    .card:hover {
+      transform: translateY(-5px);
+      transition: transform 0.3s ease-in-out;
+    }
+
     .card-title {
-      color: #007bff;
+      color: #15096d; /* Morado */
       font-size: 24px;
       font-weight: bold;
+      margin-bottom: 20px; /* Añadido para espacio entre título y tarjetas */
     }
 
     .card-text {
@@ -66,66 +74,258 @@
       }
     }
 
-    .rotate {
-      animation: rotate 2s linear infinite;
+    /* Botón flotante de WhatsApp */
+    .whatsapp-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1000;
     }
 
-    @keyframes rotate {
-      from {
-        transform: rotate(0deg);
+    /* Logo "Incubaunas" */
+    .brand-logo {
+      max-width: 150px;
+    }
+
+    /* Estilos para las tarjetas en dispositivos móviles */
+    @media (max-width: 576px) {
+      .jumbotron {
+        margin-top: 100px; /* Aumentar el margen superior en dispositivos móviles */
       }
-      to {
-        transform: rotate(360deg);
+    }
+
+    .typing-animation::after {
+      content: '|';
+      animation: blink 0.75s infinite alternate;
+    }
+
+    @keyframes blink {
+      0% {
+        opacity: 0;
       }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    /* Sección de Programas */
+    .program-section {
+      padding: 50px 0;
+    }
+
+    .program-title {
+      color: #15096d;
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .program-card {
+      margin-bottom: 30px;
+    }
+
+    /* Sección de Mentores */
+    .mentors-section {
+      padding: 50px 0;
+      background-color: #f9f9f9;
+    }
+
+    .mentors-title {
+      color: #15096d;
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .mentor-card {
+      margin-bottom: 30px;
+    }
+
+    /* Sección de Aliados */
+    .partners-section {
+      padding: 50px 0;
+    }
+
+    .partners-title {
+      color: #15096d;
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .partner-card {
+      margin-bottom: 30px;
     }
   </style>
 </head>
 <body>
 
-  <div class="jumbotron text-center animate__animated animate__fadeIn">
-    <h1 class="display-4">¡Bienvenido!</h1>
-    <p class="lead">Gracias por visitar nuestra página.</p>
-    <hr class="my-4">
-    <p>Esperamos que te guste lo que tenemos para ofrecerte.</p>
-    <a class="btn btn-primary btn-lg" href="#" role="button">Explorar</a>
-  </div>
+  <header style="background: linear-gradient(to right, rgb(64, 64, 238), green);" class="text-white py-4">
+    <div class="container">
+      <div class="row justify-content-center"> <!-- Modificado para centrar los elementos -->
+        <div class="col-md-6">
+          <h1 class="mb-0">
+            <span style="color: blue;">INCUBA</span><span style="color: green;">UNAS</span>
+          </h1>
+        </div>
+        <div class="col-md-6 text-right">
+          <a href="#" class="text-white">Inicio</a>
+          <a href="#" class="text-white">Nosotros</a>
+          <a href="#" class="ml-3 text-white">Servicios</a>
+        </div>
+      </div>
+    </div>
+  </header>
 
+  <div class="jumbotron text-center animate__animated animate__fadeIn">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1Yp__tkKmtqAL-c4rycxHLb0H879g_qtEgA&s" alt="Brand Logo" class="brand-logo animate__animated animate__fadeInDown">
+    <h1 class="display-4"><span class="typed-text"></span><span class="typing-animation"></span></h1>
+    <div class="welcome-text animate__animated animate__fadeInUp animate__delay-2s">
+      <p class="lead">Gracias por visitar nuestra página.</p>
+      <p>Esperamos que te guste lo que tenemos para ofrecerte.</p>
+    </div>
+    <a class="btn btn-primary btn-lg animate__animated animate__fadeIn animate__delay-3s" href="#" role="button">¡Empecemos!</a>
+  </div>
+  
   <div class="container">
-    <div class="row">
-      <div class="col-md-4">
-        <div class="card fade-in">
-          <div class="card-body text-center">
-            <div class="rotate">🎉</div>
-            <h5 class="card-title">Productos exclusivos</h5>
-            <p class="card-text">Descubre nuestra selección de productos exclusivos y de alta calidad.</p>
+    <!-- Sección de Programas -->
+    <div class="program-section">
+      <h2 class="program-title">Programas</h2>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card program-card fade-in">
+            <div class="card-body text-center">
+              <h5 class="card-title">Incubación</h5>
+              <p class="card-text">Durante todo el año.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card program-card fade-in">
+            <div class="card-body text-center">
+              <h5 class="card-title">Preincubación</h5>
+              <p class="card-text">Durante todo el año.</p>
+            </div>
           </div>
         </div>
       </div>
-      <div class="col-md-4">
-        <div class="card fade-in">
-          <div class="card-body text-center">
-            <div class="rotate">💼</div>
-            <h5 class="card-title">Servicios personalizados</h5>
-            <p class="card-text">Ofrecemos servicios adaptados a tus necesidades y preferencias.</p>
+    </div>
+
+    <!-- Sección de Mentores -->
+    <div class="mentors-section">
+      <h2 class="mentors-title">Mentores</h2>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card mentor-card fade-in">
+            <img src="https://via.placeholder.com/150" class="card-img-top" alt="Mentor 1">
+            <div class="card-body text-center">
+              <h5 class="card-title">Mentor 1</h5>
+              <p class="card-text">Descripción del Mentor 1.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card mentor-card fade-in">
+            <img src="https://via.placeholder.com/150" class="card-img-top" alt="Mentor 2">
+            <div class="card-body text-center">
+              <h5 class="card-title">Mentor 2</h5>
+              <p class="card-text">Descripción del Mentor 2.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card mentor-card fade-in">
+            <img src="https://via.placeholder.com/150" class="card-img-top" alt="Mentor 3">
+            <div class="card-body text-center">
+              <h5 class="card-title">Mentor 3</h5>
+              <p class="card-text">Descripción del Mentor 3.</p>
+            </div>
           </div>
         </div>
       </div>
-      <div class="col-md-4">
-        <div class="card fade-in">
-          <div class="card-body text-center">
-            <div class="rotate">🌟</div>
-            <h5 class="card-title">Experiencia única</h5>
-            <p class="card-text">Vive una experiencia única con nosotros y descubre algo nuevo cada día.</p>
+    </div>
+
+    <!-- Sección de Aliados -->
+    <div class="partners-section">
+      <h2 class="partners-title">Entidades Aliadas</h2>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card partner-card fade-in">
+            <img src="https://via.placeholder.com/150" class="card-img-top" alt="Entidad Aliada 1">
+            <div class="card-body text-center">
+              <h5 class="card-title">Entidad Aliada 1</h5>
+              <p class="card-text">Descripción de la entidad aliada 1.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card partner-card fade-in">
+            <img src="https://via.placeholder.com/150" class="card-img-top" alt="Entidad Aliada 2">
+            <div class="card-body text-center">
+              <h5 class="card-title">Entidad Aliada 2</h5>
+              <p class="card-text">Descripción de la entidad aliada 2.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card partner-card fade-in">
+            <img src="https://via.placeholder.com/150" class="card-img-top" alt="Entidad Aliada 3">
+            <div class="card-body text-center">
+              <h5 class="card-title">Entidad Aliada 3</h5>
+              <p class="card-text">Descripción de la entidad aliada 3.</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- jQuery, Popper.js, Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- Botón flotante de WhatsApp -->
+  <a href="https://api.whatsapp.com/send?phone=TuNumeroDeTelefono&text=Hola%2C%20me%20gustar%C3%ADa%20obtener%20m%C3%A1s%20informaci%C3%B3n%20sobre%20INCUBA%20UNAS" target="_blank" class="whatsapp-btn">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPADVMClbsK0sjUlU7iTXpQ7krJwQfTW_ezg&s" alt="WhatsApp Icon" style="width: 60px; height: 60px;">
+  </a>
 
+  <!-- Bootstrap JS -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- React JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.production.min.js"></script>
+  <script>
+    // Simulación de efecto de escritura
+    const textArray = ["Bienvenido somos INCUBA UNAS", "¡agamos realidad tus ideas!",];
+    let textIndex = 0;
+    let letterIndex = 0;
+    let typingTimeout;
+
+    function typeText() {
+      if (letterIndex < textArray[textIndex].length) {
+        document.querySelector('.typed-text').textContent += textArray[textIndex].charAt(letterIndex);
+        letterIndex++;
+        typingTimeout = setTimeout(typeText, 100);
+      } else {
+        clearTimeout(typingTimeout);
+        setTimeout(eraseText, 1500);
+      }
+    }
+
+    function eraseText() {
+      if (letterIndex > 0) {
+          document.querySelector('.typed-text').textContent = textArray[textIndex].substring(0, letterIndex - 1);
+          letterIndex--;
+          typingTimeout = setTimeout(eraseText, 50);
+        } else {
+          clearTimeout(typingTimeout);
+          textIndex = (textIndex + 1) % textArray.length;
+          setTimeout(typeText, 500);
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(typeText, 500);
+      });
+  </script>
 </body>
 </html>
