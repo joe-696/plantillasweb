@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Categorías</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f0f0;
+    }
+
+    header {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .tabs {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .tablink {
+      cursor: pointer;
+      padding: 10px 20px;
+      margin: 0 5px;
+      border-radius: 5px;
+      background-color: #ddd;
+      color: #333;
+      transition: background-color 0.3s;
+    }
+
+    .tablink:hover {
+      background-color: #ccc;
+    }
+
+    .content {
+      display: none;
+      padding: 20px;
+      border-radius: 10px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .active-content {
+      display: block;
+    }
+
+    .animated {
+      animation-duration: 1s;
+    }
+
+    @media (max-width: 768px) {
+      .tabs {
+        flex-wrap: wrap;
+      }
+      .tablink {
+        flex: 1 0 100%;
+        margin: 5px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1 class="animate__animated animate__bounceInDown">Contenido Dinámico</h1>
+</header>
+
+<div class="tabs">
+  <div class="tablink" onclick="openCategory('categoria1')">Categoría 1</div>
+  <div class="tablink" onclick="openCategory('categoria2')">Categoría 2</div>
+  <div class="tablink" onclick="openCategory('categoria3')">Categoría 3</div>
+</div>
+
+<div id="categoria1" class="content active-content animate__animated animate__fadeIn">
+  <h2>Categoría 1</h2>
+  <p>Este es el contenido de la categoría 1.</p>
+</div>
+
+<div id="categoria2" class="content animate__animated animate__fadeIn">
+  <h2>Categoría 2</h2>
+  <p>Este es el contenido de la categoría 2.</p>
+</div>
+
+<div id="categoria3" class="content animate__animated animate__fadeIn">
+  <h2>Categoría 3</h2>
+  <p>Este es el contenido de la categoría 3.</p>
+</div>
+
+<script>
+  function openCategory(categoryName) {
+    var tabcontent = document.getElementsByClassName("content");
+    for (var i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].classList.remove("active-content");
+    }
+    document.getElementById(categoryName).classList.add("active-content");
+  }
+</script>
+
+</body>
+</html>

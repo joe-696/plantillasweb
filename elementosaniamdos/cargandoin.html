@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Experiencia Sorprendente</title>
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<!-- Animaciones con GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/gsap.min.js"></script>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+    .container {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #f0f0f0;
+    }
+    .box {
+        width: 100px;
+        height: 100px;
+        background-color: #007bff;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="box"></div>
+</div>
+
+<script>
+    // Animación con GSAP
+    gsap.to('.box', { duration: 2, x: 200, rotation: 360, backgroundColor: '#ff0000', repeat: -1, yoyo: true });
+
+    // Función para cambiar el color al hacer clic
+    document.querySelector('.box').addEventListener('click', function() {
+        gsap.to('.box', { duration: 0.5, backgroundColor: '#00ff00', y: 200, ease: 'bounce' });
+    });
+</script>
+
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

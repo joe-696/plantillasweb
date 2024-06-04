@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Experiencia Única</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 10px;
+    }
+
+    .tablink {
+      cursor: pointer;
+    }
+
+    .content {
+      display: none;
+      padding: 20px;
+    }
+
+    .content.active {
+      display: block;
+    }
+
+    .box {
+      width: 200px;
+      height: 200px;
+      background-color: #007bff;
+      margin: 20px auto;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Experiencia Única</h1>
+</header>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <div class="box" id="box1"></div>
+    </div>
+    <div class="col-sm">
+      <div class="box" id="box2"></div>
+    </div>
+    <div class="col-sm">
+      <div class="box" id="box3"></div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.development.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.development.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    anime({
+      targets: '#box1',
+      translateX: 250,
+      rotate: '1turn',
+      backgroundColor: '#ff0000',
+      duration: 2000,
+      easing: 'easeInOutQuad'
+    });
+
+    anime({
+      targets: '#box2',
+      translateX: 250,
+      rotate: '2turn',
+      backgroundColor: '#00ff00',
+      duration: 2000,
+      easing: 'easeInOutQuad',
+      delay: 500
+    });
+
+    anime({
+      targets: '#box3',
+      translateX: 250,
+      rotate: '3turn',
+      backgroundColor: '#ff00ff',
+      duration: 2000,
+      easing: 'easeInOutQuad',
+      delay: 1000
+    });
+  });
+</script>
+
+</body>
+</html>

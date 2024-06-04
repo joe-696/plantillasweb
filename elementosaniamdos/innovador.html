@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Experiencia Asombrosa</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    #container {
+      position: relative;
+      perspective: 1000px;
+      height: 100vh;
+    }
+
+    .box {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      background-color: #3498db;
+      border-radius: 10px;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 24px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<div id="container">
+  <div class="box animate__animated animate__bounceIn" style="top: 50px; left: 50px;" onclick="rotate()">Click Me!</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+<script>
+  function rotate() {
+    anime({
+      targets: '.box',
+      rotateY: '+=360',
+      duration: 2000,
+      easing: 'easeInOutQuad'
+    });
+  }
+</script>
+
+</body>
+</html>

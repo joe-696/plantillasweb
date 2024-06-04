@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Experiencia Única</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+    .header {
+        background-color: #333;
+        color: #fff;
+        padding: 60px 0;
+        text-align: center;
+    }
+    .section {
+        padding: 100px 0;
+        text-align: center;
+    }
+    .box {
+        background-color: #f8f9fa;
+        border-radius: 10px;
+        padding: 40px;
+        margin-bottom: 30px;
+    }
+    .box h3 {
+        margin-top: 0;
+    }
+    .box img {
+        max-width: 100%;
+        border-radius: 10px;
+    }
+    .box:hover {
+        transform: scale(1.1);
+    }
+</style>
+</head>
+<body>
+
+<div class="header">
+    <h1 class="animate__animated animate__bounceInDown">¡Bienvenido a una Experiencia Única!</h1>
+</div>
+
+<div class="container">
+    <div class="section">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="box animate__animated animate__fadeInLeft">
+                    <h3>Animaciones Sorprendentes</h3>
+                    <p>Descubre animaciones avanzadas con Anime.js y AOS.</p>
+                    <img src="https://via.placeholder.com/300" alt="Animación">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="box animate__animated animate__fadeInUp">
+                    <h3>Diseño Responsivo</h3>
+                    <p>Utiliza Bootstrap para un diseño que se adapta a cualquier dispositivo.</p>
+                    <img src="https://via.placeholder.com/300" alt="Diseño Responsivo">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="box animate__animated animate__fadeInRight">
+                    <h3>Efectos 3D</h3>
+                    <p>Agrega profundidad con efectos 3D y sombras.</p>
+                    <img src="https://via.placeholder.com/300" alt="Efectos 3D">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>
+    AOS.init();
+</script>
+
+</body>
+</html>

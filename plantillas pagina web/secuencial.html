@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Experiencia Innovadora</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f0f0;
+    }
+
+    header {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    .section {
+      padding: 50px 0;
+    }
+
+    .card {
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+    }
+
+    .animated {
+      animation-duration: 1s;
+      animation-fill-mode: both;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fadeInUp {
+      animation-name: fadeInUp;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Experiencia Innovadora</h1>
+</header>
+
+<section class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card animated fadeInUp">
+          <div class="card-body">
+            <h5 class="card-title">Feature 1</h5>
+            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ut dolor eu justo tincidunt condimentum.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card animated fadeInUp" style="animation-delay: 0.2s;">
+          <div class="card-body">
+            <h5 class="card-title">Feature 2</h5>
+            <p class="card-text">Praesent eget magna a nisi convallis ultrices. Curabitur sed arcu non felis tincidunt consequat.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card animated fadeInUp" style="animation-delay: 0.4s;">
+          <div class="card-body">
+            <h5 class="card-title">Feature 3</h5>
+            <p class="card-text">Fusce eget ipsum consequat, sodales felis non, pretium tortor. Aliquam erat volutpat.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+<script>
+  // Animating the cards with anime.js
+  document.addEventListener('DOMContentLoaded', function() {
+    anime({
+      targets: '.animated',
+      translateY: [100, 0],
+      opacity: [0, 1],
+      easing: 'easeOutExpo',
+      delay: anime.stagger(100, {start: 300}),
+    });
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Experiencia Innovadora</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    #particles-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    .particle {
+      position: absolute;
+      background-color: #ffffff;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    @keyframes move {
+      0% {
+        transform: translateY(0) translateX(0) rotate(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) translateX(calc(-100vw + 100%)) rotate(720deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div id="particles-container"></div>
+
+<div class="content">
+  <header>
+    <h1>Experiencia Innovadora</h1>
+  </header>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <h2>Categoría 1</h2>
+        <p>Este es el contenido de la categoría 1.</p>
+      </div>
+      <div class="col">
+        <h2>Categoría 2</h2>
+        <p>Este es el contenido de la categoría 2.</p>
+      </div>
+      <div class="col">
+        <h2>Categoría 3</h2>
+        <p>Este es el contenido de la categoría 3.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function createParticle() {
+    const particle = document.createElement('div');
+    particle.classList.add('particle');
+    const size = Math.random() * 15 + 5;
+    const color = `rgba(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255}, ${Math.random()})`;
+    particle.style.width = `${size}px`;
+    particle.style.height = `${size}px`;
+    particle.style.backgroundColor = color;
+    const startX = Math.random() * window.innerWidth;
+    const startY = Math.random() * window.innerHeight;
+    particle.style.left = `${startX}px`;
+    particle.style.top = `${startY}px`;
+    document.getElementById('particles-container').appendChild(particle);
+    setTimeout(() => {
+      particle.style.animation = 'move 5s linear forwards';
+    }, 100);
+    setTimeout(() => {
+      particle.remove();
+    }, 5100);
+  }
+
+  setInterval(createParticle, 100);
+</script>
+
+</body>
+</html>

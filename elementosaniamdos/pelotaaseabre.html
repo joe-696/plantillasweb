@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Experiencia Única</title>
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<!-- Anime.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+<style>
+    /* Estilos personalizados */
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f8f9fa;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+    }
+
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .box {
+        width: 200px;
+        height: 200px;
+        background-color: #3498db;
+        border-radius: 50%;
+        position: relative;
+    }
+
+    .box::before, .box::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: #fff;
+        border-radius: 50%;
+        z-index: -1;
+        opacity: 0;
+    }
+
+    .box::before {
+        top: -20px;
+        left: -20px;
+        animation: animateBefore 2s ease infinite;
+    }
+
+    .box::after {
+        bottom: -20px;
+        right: -20px;
+        animation: animateAfter 2s ease infinite;
+    }
+
+    @keyframes animateBefore {
+        0% {
+            opacity: 0;
+            transform: scale(1);
+        }
+        50% {
+            opacity: 1;
+            transform: scale(1.2);
+        }
+        100% {
+            opacity: 0;
+            transform: scale(1);
+        }
+    }
+
+    @keyframes animateAfter {
+        0% {
+            opacity: 0;
+            transform: scale(1);
+        }
+        50% {
+            opacity: 1;
+            transform: scale(1.2);
+        }
+        100% {
+            opacity: 0;
+            transform: scale(1);
+        }
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="box"></div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    anime({
+        targets: '.box',
+        translateY: [
+            { value: -50, duration: 2000 },
+            { value: 0, duration: 2000 }
+        ],
+        scaleX: [
+            { value: 2, duration: 2000, easing: 'easeInOutQuad' },
+            { value: 1, duration: 2000, easing: 'easeInOutQuad' }
+        ],
+        scaleY: [
+            { value: 2, duration: 2000, easing: 'easeInOutQuad' },
+            { value: 1, duration: 2000, easing: 'easeInOutQuad' }
+        ],
+        loop: true
+    });
+</script>
+</body>
+</html>

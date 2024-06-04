@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galería 3D</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+    }
+
+    .gallery {
+      position: absolute;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      perspective: 2000px;
+    }
+
+    .gallery .item {
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      transform-style: preserve-3d;
+      transition: transform 0.5s;
+    }
+
+    .gallery .item img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+
+<div class="gallery">
+  <div class="item" style="transform: rotateY(0deg) translateZ(600px);">
+    <img src="https://via.placeholder.com/400x400?text=Image+1" alt="Image 1">
+  </div>
+  <div class="item" style="transform: rotateY(120deg) translateZ(600px);">
+    <img src="https://via.placeholder.com/400x400?text=Image+2" alt="Image 2">
+  </div>
+  <div class="item" style="transform: rotateY(240deg) translateZ(600px);">
+    <img src="https://via.placeholder.com/400x400?text=Image+3" alt="Image 3">
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.development.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.development.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const gallery = document.querySelector('.gallery');
+    const items = document.querySelectorAll('.item');
+
+    let mouseX = 0;
+    let mouseY = 0;
+
+    gallery.addEventListener('mousemove', e => {
+      mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+      mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
+    });
+
+    function animateGallery() {
+      items.forEach(item => {
+        const bounds = item.getBoundingClientRect();
+        const centerX = bounds.left + bounds.width / 2;
+        const centerY = bounds.top + bounds.height / 2;
+        const deltaX = mouseX - centerX;
+        const deltaY = mouseY - centerY;
+        const rotateX = deltaY * 0.1;
+        const rotateY = deltaX * 0.1;
+        anime({
+          targets: item,
+          rotateX: rotateX,
+          rotateY: rotateY,
+          duration: 1000,
+          easing: 'easeOutQuad'
+        });
+      });
+      requestAnimationFrame(animateGallery);
+    }
+
+    animateGallery();
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Experiencia Interactiva Avanzada</title>
+<!-- Librerías y estilos -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.production.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/animejs"></script>
+<style>
+    body, html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        overflow: hidden;
+        perspective: 1000px; /* Añadimos perspectiva para efectos 3D */
+    }
+    #container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #333;
+    }
+    .box {
+        width: 200px;
+        height: 200px;
+        background-color: #ffcc00;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 24px;
+        color: #333;
+        border-radius: 10px;
+        animation: pulse 2s infinite alternate; /* Animación con CSS */
+        cursor: pointer;
+    }
+    .box:hover {
+        animation: none; /* Detenemos la animación al pasar el mouse */
+    }
+    @keyframes pulse {
+        from {
+            transform: scale(1);
+        }
+        to {
+            transform: scale(1.2);
+        }
+    }
+</style>
+</head>
+<body>
+
+<div id="container">
+    <div class="box" onclick="animateBox()">Haz clic aquí</div>
+</div>
+
+<!-- React Component -->
+<script>
+    const BoxComponent = () => {
+        return (
+            <div className="box" onClick={animateBox}>
+                Haz clic aquí
+            </div>
+        );
+    }
+
+    ReactDOM.render(
+        <BoxComponent />,
+        document.getElementById('container')
+    );
+</script>
+
+<!-- Animación con Anime.js -->
+<script>
+    function animateBox() {
+        anime({
+            targets: '.box',
+            translateX: 250,
+            rotate: '1turn',
+            backgroundColor: '#ff6699',
+            duration: 1000,
+            easing: 'easeInOutQuad'
+        });
+    }
+</script>
+
+</body>
+</html>

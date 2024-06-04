@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Experiencia Única</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 0;
+    }
+    .container {
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    .card {
+        position: relative;
+        overflow: hidden;
+        border-radius: 10px;
+        margin-bottom: 30px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+    .card img {
+        width: 100%;
+        height: auto;
+        transition: transform 0.5s;
+    }
+    .card:hover img {
+        transform: scale(1.1);
+    }
+    .card-body {
+        padding: 20px;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Experiencia Única</h1>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <img src="https://via.placeholder.com/300" alt="Imagen 1">
+                <div class="card-body">
+                    <h5 class="card-title">Producto 1</h5>
+                    <p class="card-text">Descripción del producto 1.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <img src="https://via.placeholder.com/300" alt="Imagen 2">
+                <div class="card-body">
+                    <h5 class="card-title">Producto 2</h5>
+                    <p class="card-text">Descripción del producto 2.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <img src="https://via.placeholder.com/300" alt="Imagen 3">
+                <div class="card-body">
+                    <h5 class="card-title">Producto 3</h5>
+                    <p class="card-text">Descripción del producto 3.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.0/anime.min.js"></script>
+<script>
+    anime({
+        targets: 'h1',
+        translateY: [-100, 0],
+        opacity: [0, 1],
+        easing: 'easeOutExpo',
+        duration: 1500,
+        delay: 500
+    });
+    anime({
+        targets: '.card',
+        translateX: [-100, 0],
+        opacity: [0, 1],
+        easing: 'easeOutExpo',
+        duration: 1500,
+        delay: anime.stagger(300)
+    });
+</script>
+
+</body>
+</html>
+

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Experiencia Única</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Anime.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+  <style>
+    /* Estilos personalizados */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #212529;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+      overflow: hidden; /* Deshabilita el desplazamiento vertical */
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1; /* Coloca el canvas detrás de todo el contenido */
+    }
+
+    header {
+      padding: 50px 0;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 24px;
+      margin-bottom: 40px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.7);
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    }
+
+    .btn-primary {
+      background-color: #ffc107;
+      border-color: #ffc107;
+      padding: 12px 24px;
+      font-size: 20px;
+      border-radius: 30px;
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      background-color: #ff9800;
+      border-color: #ff9800;
+    }
+
+    /* Estilos para dispositivos móviles */
+    @media screen and (max-width: 768px) {
+      h1 {
+        font-size: 36px;
+      }
+      p {
+        font-size: 18px;
+      }
+      .container {
+        padding: 10px;
+      }
+      .btn-primary {
+        padding: 10px 20px;
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="canvas"></canvas>
+
+<header>
+  <h1>Bienvenido a la Experiencia Única</h1>
+  <p>¡Explora un mundo de creatividad y tecnología avanzada!</p>
+  <a href="#features" class="btn btn-primary">Descubre más</a>
+</header>
+
+<div class="container" id="features">
+  <h2>Funcionalidades Innovadoras</h2>
+  <p>Sumérgete en un océano de posibilidades con nuestras funcionalidades de última generación diseñadas para inspirar y sorprender.</p>
+  <h2>Tecnología Avanzada</h2>
+  <p>Descubre el poder de la tecnología avanzada mientras exploras nuestras soluciones innovadoras que están cambiando el mundo.</p>
+  <h2>Experiencia Única</h2>
+  <p>Vive una experiencia única y envolvente que desafiará tus sentidos y te llevará a lugares que nunca antes habías imaginado.</p>
+</div>
+
+<!-- JavaScript personalizado -->
+<script>
+  // Configuración del canvas
+  const canvas = document.getElementById('canvas');
+  const context = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  // Función para dibujar formas aleatorias en el canvas
+  function drawRandomShapes() {
+    const colors = ['#ff5f5f', '#ffdd5f', '#5fff5f', '#5f5fff']; // Colores aleatorios
+    for (let i = 0; i < 50; i++) {
+      const x = Math.random() * canvas.width;
+      const y = Math.random() * canvas.height;
+      const radius = Math.random() * 50 + 20;
+      const color = colors[Math.floor(Math.random() * colors.length)];
+      context.beginPath();
+      context.arc(x, y, radius, 0, Math.PI * 2, false);
+      context.fillStyle = color;
+      context.fill();
+    }
+  }
+
+  // Animación continua del canvas
+  function animateCanvas() {
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    drawRandomShapes();
+    requestAnimationFrame(animateCanvas);
+  }
+
+  // Inicia la animación del canvas cuando se carga la página
+  window.onload = function() {
+    animateCanvas();
+  };
+</script>
+
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
