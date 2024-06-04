@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Categorías</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 10px;
+    }
+
+    .tablink {
+      cursor: pointer;
+    }
+
+    .content {
+      display: none;
+      padding: 20px;
+    }
+
+    .content.active {
+      display: block;
+    }
+
+    .carousel-inner {
+      display: flex;
+      flex-wrap: nowrap;
+    }
+
+    .carousel-item {
+      flex: 0 0 auto;
+      width: 100%;
+      transition: transform 0.6s ease;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Contenido Dinámico</h1>
+</header>
+
+<div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div id="categoria1" class="content carousel-item active">
+      <h2>Categoría 1</h2>
+      <p>Este es el contenido de la categoría 1.</p>
+    </div>
+    <div id="categoria2" class="content carousel-item">
+      <h2>Categoría 2</h2>
+      <p>Este es el contenido de la categoría 2.</p>
+    </div>
+    <div id="categoria3" class="content carousel-item">
+      <h2>Categoría 3</h2>
+      <p>Este es el contenido de la categoría 3.</p>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.development.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.development.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<script>
+  function openCategory(categoryName) {
+    var tabcontent = document.getElementsByClassName("content");
+    for (var i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].classList.remove("active");
+    }
+    document.getElementById(categoryName).classList.add("active");
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var carousel = document.querySelector('#myCarousel');
+    var carouselInstance = new bootstrap.Carousel(carousel);
+  });
+</script>
+
+</body>
+</html>

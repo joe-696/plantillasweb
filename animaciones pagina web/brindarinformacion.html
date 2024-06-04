@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Página Avanzada</title>
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<style>
+    /* Estilos personalizados */
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f8f9fa;
+        overflow-x: hidden; /* Evita el desplazamiento horizontal */
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .category {
+        margin-bottom: 30px;
+    }
+
+    .category h2 {
+        cursor: pointer;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 10px;
+        transition: border-bottom-color 0.3s ease;
+    }
+
+    .category-content {
+        display: none;
+        margin-top: 20px;
+    }
+
+    .category-content.active {
+        display: block;
+    }
+
+    /* Estilos para dispositivos móviles */
+    @media screen and (max-width: 768px) {
+        .container {
+            padding: 10px;
+        }
+        .category h2 {
+            font-size: 20px;
+        }
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="category">
+        <h2><i class="fas fa-laptop"></i> Tecnología</h2>
+        <div class="category-content">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed gravida consequat lacus sit amet convallis. Integer pharetra purus nec neque aliquet sodales.</p>
+        </div>
+    </div>
+    <div class="category">
+        <h2><i class="fas fa-futbol"></i> Deportes</h2>
+        <div class="category-content">
+            <p>Nulla facilisi. Donec eu orci ut ex convallis auctor. Integer sed lorem sollicitudin, congue purus sit amet, blandit leo.</p>
+        </div>
+    </div>
+    <div class="category">
+        <h2><i class="fas fa-book"></i> Educación</h2>
+        <div class="category-content">
+            <p>Vestibulum tincidunt ac erat ac sollicitudin. Phasellus ultricies est quis mi blandit laoreet. Mauris ultrices aliquam felis, at commodo elit vestibulum eget.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    // Script para mostrar/ocultar contenido al hacer clic en los encabezados de categoría
+    $('.category h2').on('click', function() {
+        $(this).next('.category-content').toggleClass('active');
+    });
+
+    // Script para desplazamiento horizontal en dispositivos móviles
+    let initialX = null;
+
+    function startTouch(e) {
+        initialX = e.touches[0].clientX;
+    }
+
+    function moveTouch(e) {
+        if (initialX === null) {
+            return;
+        }
+
+        let currentX = e.touches[0].clientX;
+        let diffX = initialX - currentX;
+
+        if (Math.abs(diffX) > 20) {
+            if (diffX > 0) {
+                // Desplazamiento hacia la izquierda
+                document.body.scrollLeft += 20;
+            } else {
+                // Desplazamiento hacia la derecha
+                document.body.scrollLeft -= 20;
+            }
+        }
+
+        initialX = null;
+
+        e.preventDefault();
+    }
+
+    document.addEventListener('touchstart', startTouch, false);
+    document.addEventListener('touchmove', moveTouch, false);
+</script>
+</body>
+</html>

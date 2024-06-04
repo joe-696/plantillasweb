@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menú Desplegable</title>
+  <style>
+    /* Estilos personalizados */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden; /* Evita el desplazamiento horizontal */
+    }
+
+    #container {
+      display: flex;
+      height: 100vh;
+      overflow-x: hidden; /* Evita el desplazamiento horizontal */
+    }
+
+    #sidebar {
+      width: 200px;
+      background-color: #333;
+      color: #fff;
+      transition: all 0.3s ease;
+    }
+
+    #sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    #sidebar ul li {
+      padding: 10px 15px;
+      border-bottom: 1px solid #555;
+    }
+
+    #sidebar ul li:hover {
+      background-color: #555;
+    }
+
+    #content {
+      flex: 1;
+      padding: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .category {
+      display: none;
+    }
+
+    .active-category {
+      display: block;
+    }
+
+    @media screen and (max-width: 768px) {
+      #sidebar {
+        width: 0;
+      }
+      #content {
+        padding-left: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div id="container">
+  <!-- Sidebar -->
+  <div id="sidebar">
+    <ul>
+      <li onclick="showCategory('category1')">Categoría 1</li>
+      <li onclick="showCategory('category2')">Categoría 2</li>
+      <li onclick="showCategory('category3')">Categoría 3</li>
+    </ul>
+  </div>
+
+  <!-- Content -->
+  <div id="content">
+    <div class="category" id="category1">
+      <h2>Categoría 1</h2>
+      <p>Contenido de la categoría 1.</p>
+    </div>
+    <div class="category" id="category2">
+      <h2>Categoría 2</h2>
+      <p>Contenido de la categoría 2.</p>
+    </div>
+    <div class="category" id="category3">
+      <h2>Categoría 3</h2>
+      <p>Contenido de la categoría 3.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Función para mostrar la categoría seleccionada
+  function showCategory(categoryId) {
+    var categories = document.getElementsByClassName("category");
+    for (var i = 0; i < categories.length; i++) {
+      categories[i].classList.remove("active-category");
+    }
+    document.getElementById(categoryId).classList.add("active-category");
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Categorías</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 10px;
+    }
+
+    nav {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #333;
+      padding: 10px 20px;
+      margin: 0 5px;
+      border-radius: 5px;
+      background-color: #f0f0f0;
+    }
+
+    nav a:hover {
+      background-color: #ddd;
+    }
+
+    .content {
+      display: none;
+      padding: 20px;
+    }
+
+    .content.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Contenido Dinámico</h1>
+</header>
+
+<nav>
+  <a href="#" class="tablink" onclick="openCategory(event, 'categoria1')">Categoría 1</a>
+  <a href="#" class="tablink" onclick="openCategory(event, 'categoria2')">Categoría 2</a>
+  <a href="#" class="tablink" onclick="openCategory(event, 'categoria3')">Categoría 3</a>
+</nav>
+
+<div id="categoria1" class="content">
+  <h2>Categoría 1</h2>
+  <p>Este es el contenido de la categoría 1.</p>
+</div>
+
+<div id="categoria2" class="content">
+  <h2>Categoría 2</h2>
+  <p>Este es el contenido de la categoría 2.</p>
+</div>
+
+<div id="categoria3" class="content">
+  <h2>Categoría 3</h2>
+  <p>Este es el contenido de la categoría 3.</p>
+</div>
+
+<script>
+  function openCategory(evt, categoryName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("content");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablink");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(categoryName).style.display = "block";
+    evt.currentTarget.className += " active";
+  }
+</script>
+
+</body>
+</html>
