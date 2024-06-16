@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Subir Video a Vimeo</title>
+</head>
+<body>
+  <h1>Subir Video a Vimeo</h1>
+  <input type="file" id="videoFile" accept="video/*">
+  <button onclick="uploadVideo()">Subir Video</button>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vimeo/3.4.0/vimeo.min.js"></script>
+  <script>
+    function uploadVideo() {
+      const client = new Vimeo('d382064da1d1a1c2e82e6ad79c5bf147d0338825', 'fp73UWaDQN78RpFKsutIfg3XKBYrjbP9FMRJ45rtpACnEyZcgH8j2LnsLJbR+u2YdPbjmVywursDfSA38+SbdsbqWIiKKcB+k3oF+cc+56EFoJcIn0YMTRWBEoVdvN/M');
+
+      const fileInput = document.getElementById('videoFile');
+      const file = fileInput.files[0];
+
+      if (!file) {
+        alert('Por favor selecciona un archivo de video.');
+        return;
+      }
+
+      const uploadOptions = {
+        'name': file.name,
+        'description': 'Este es un video de prueba.',
+        'privacy': {
+          'view': 'anybody'
+        }
+      };
+
+      client.upload(
+        file,
+        uploadOptions,
+        (uri) => {
+          alert('¡El video se ha subido correctamente!');
+          console.log('El video se ha subido correctamente:', uri);
+        },
+        (bytesUploaded, bytesTotal) => {
+          const percentage = (bytesUploaded / bytesTotal * 100).toFixed(2);
+          console.log(bytesUploaded, 'bytes subidos de', bytesTotal, '(', percentage, '%)');
+        },
+        (error) => {
+          alert('Error al subir el video. Por favor, inténtalo de nuevo.');
+          console.error('Error al subir el video:', error);
+        }
+      );
+    }
+  </script>
+</body>
+</html>

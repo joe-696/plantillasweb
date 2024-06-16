@@ -3,72 +3,155 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Captura y Subida de Fotos</title>
+    <title>Planificador Diario</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            max-width: 800px;
+            width: 100%;
+        }
+        .days {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+        .days div {
+            font-weight: bold;
+            text-align: center;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            margin: 0;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+            color: #333;
+        }
+        .section ul {
+            list-style: none;
+            padding: 0;
+        }
+        .section ul li {
+            background-color: #f9f9f9;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+        }
+        .section ul li input[type="text"] {
+            flex: 1;
+            border: none;
+            background: transparent;
+            outline: none;
+            padding: 5px;
+        }
+        .section ul li input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        .section ul li .delete {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        .add-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-    <video id="video" autoplay></video>
-    <button id="captureBtn">Tomar Foto</button>
-    <div id="imageLink" style="display: none;"></div>
-
+    <div class="container">
+        <div class="days">
+            <div>L</div>
+            <div>M</div>
+            <div>X</div>
+            <div>J</div>
+            <div>V</div>
+            <div>S</div>
+            <div>D</div>
+        </div>
+        <div class="section">
+            <h2>OBJETIVOS</h2>
+            <ul id="objetivos-list">
+                <li><input type="text" placeholder="Nuevo objetivo..."></li>
+            </ul>
+            <button class="add-btn" onclick="addItem('objetivos-list')">Añadir</button>
+        </div>
+        <div class="section">
+            <h2>NO OLVIDAR</h2>
+            <ul id="no-olvidar-list">
+                <li><input type="checkbox"><input type="text" placeholder="Nuevo recordatorio..."></li>
+            </ul>
+            <button class="add-btn" onclick="addItem('no-olvidar-list', true)">Añadir</button>
+        </div>
+        <div class="section">
+            <h2>COSAS POR HACER</h2>
+            <h3>MAÑANA</h3>
+            <ul id="manana-list">
+                <li><input type="checkbox"><input type="text" placeholder="Nueva tarea..."></li>
+            </ul>
+            <button class="add-btn" onclick="addItem('manana-list', true)">Añadir</button>
+            <h3>TARDE</h3>
+            <ul id="tarde-list">
+                <li><input type="checkbox"><input type="text" placeholder="Nueva tarea..."></li>
+            </ul>
+            <button class="add-btn" onclick="addItem('tarde-list', true)">Añadir</button>
+            <h3>NOCHE</h3>
+            <ul id="noche-list">
+                <li><input type="checkbox"><input type="text" placeholder="Nueva tarea..."></li>
+            </ul>
+            <button class="add-btn" onclick="addItem('noche-list', true)">Añadir</button>
+        </div>
+        <div class="section">
+            <h2>EN MI TIEMPO LIBRE</h2>
+            <ul id="tiempo-libre-list">
+                <li><input type="text" placeholder="Nueva actividad..."></li>
+            </ul>
+            <button class="add-btn" onclick="addItem('tiempo-libre-list')">Añadir</button>
+        </div>
+    </div>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const video = document.getElementById("video");
-            const imageLink = document.getElementById("imageLink");
-
-            navigator.mediaDevices.getUserMedia({ video: true })
-                .then(stream => {
-                    video.srcObject = stream;
-                })
-                .catch(error => {
-                    console.error("Error obteniendo acceso a la cámara:", error);
-                });
-
-            document.getElementById("captureBtn").addEventListener("click", function() {
-                const canvas = document.createElement("canvas");
-                const context = canvas.getContext("2d");
-                canvas.width = video.videoWidth;
-                canvas.height = video.videoHeight;
-                context.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-                const imgDataUrl = canvas.toDataURL("image/png");
-
-                // Subir la imagen a tu cuenta de ImgBB con tu API key
-                uploadImage(imgDataUrl);
-            });
-
-            function uploadImage(dataUrl) {
-                const formData = new FormData();
-                formData.append("key", "f40a729e25405c2c753c6af1aa4c4761");
-                formData.append("image", dataURItoBlob(dataUrl));
-
-                fetch("https://api.imgbb.com/1/upload", {
-                    method: "POST",
-                    body: formData
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        alert("Imagen subida con éxito. Puedes verla en este enlace: " + data.data.url);
-                    } else {
-                        alert("Error al subir la imagen: " + data.error.message);
-                    }
-                })
-                .catch(error => {
-                    console.error("Error al subir la imagen:", error);
-                });
+        function addItem(listId, isCheckbox = false) {
+            const ul = document.getElementById(listId);
+            const li = document.createElement('li');
+            if (isCheckbox) {
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                li.appendChild(checkbox);
             }
-
-            function dataURItoBlob(dataURI) {
-                const byteString = atob(dataURI.split(',')[1]);
-                const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
-                const ab = new ArrayBuffer(byteString.length);
-                const ia = new Uint8Array(ab);
-                for (let i = 0; i < byteString.length; i++) {
-                    ia[i] = byteString.charCodeAt(i);
-                }
-                return new Blob([ab], { type: mimeString });
-            }
-        });
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.placeholder = 'Nuevo...';
+            li.appendChild(input);
+            const deleteBtn = document.createElement('button');
+            deleteBtn.textContent = 'Eliminar';
+            deleteBtn.className = 'delete';
+            deleteBtn.onclick = () => ul.removeChild(li);
+            li.appendChild(deleteBtn);
+            ul.appendChild(li);
+        }
     </script>
 </body>
 </html>

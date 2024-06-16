@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modal Moderno</title>
+<!-- Estilos CSS -->
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+  }
+
+  .modal-container {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  .modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 80%;
+    max-width: 600px;
+    animation-name: modal-slide;
+    animation-duration: 0.5s;
+  }
+
+  @keyframes modal-slide {
+    from {
+      transform: translateY(-100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  .close-btn {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+  }
+
+  .close-btn:hover,
+  .close-btn:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<!-- Botón de abrir modal -->
+<button onclick="openModal()">Abrir Modal</button>
+
+<!-- Modal -->
+<div id="myModal" class="modal-container">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeModal()">&times;</span>
+    <h2>Contenido del Modal</h2>
+    <p>¡Hola! Este es un ejemplo de un modal moderno y animado.</p>
+  </div>
+</div>
+
+<script>
+  // Función para abrir el modal
+  function openModal() {
+    document.getElementById('myModal').style.display = 'block';
+  }
+
+  // Función para cerrar el modal
+  function closeModal() {
+    document.getElementById('myModal').style.display = 'none';
+  }
+
+  // Cerrar el modal haciendo clic fuera de él
+  window.onclick = function(event) {
+    var modal = document.getElementById('myModal');
+    if (event.target == modal) {
+      modal.style.display = 'none';
+    }
+  }
+</script>
+
+</body>
+</html>

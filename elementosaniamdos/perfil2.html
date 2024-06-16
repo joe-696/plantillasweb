@@ -31,6 +31,7 @@
       max-width: 150px;
       margin-bottom: 20px;
       border: 5px solid #007bff;
+      cursor: pointer;
     }
 
     .profile-name {
@@ -88,7 +89,7 @@
     <div class="row justify-content-center">
       <div class="col-md-6">
         <div class="profile-card text-center animate__animated animate__fadeIn">
-          <img src="https://via.placeholder.com/150" alt="Profile Picture" class="profile-img animate-on-hover">
+          <img id="profile-picture" src="https://i.ibb.co/yQXRJRY/kakaroto.png" alt="Profile Picture" class="profile-img animate-on-hover" onclick="openFullscreen()">
           <h2 class="profile-name animate-on-hover">John Doe</h2>
           <div class="profile-info animate-on-hover">
             <p><span>Edad:</span> 30 años</p>
@@ -104,5 +105,20 @@
 
   <!-- Bootstrap JS -->
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script>
+    function openFullscreen() {
+      var elem = document.getElementById("profile-picture");
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+      } else if (elem.mozRequestFullScreen) { /* Firefox */
+        elem.mozRequestFullScreen();
+      } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+        elem.webkitRequestFullscreen();
+      } else if (elem.msRequestFullscreen) { /* IE/Edge */
+        elem.msRequestFullscreen();
+      }
+    }
+  </script>
 </body>
 </html>

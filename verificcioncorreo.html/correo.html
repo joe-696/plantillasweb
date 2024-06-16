@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enviar Código de Verificación</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <form id="contact-form">
+        <h2>Enviar Código de Verificación</h2>
+        <input type="email" id="email" name="email" placeholder="Tu Email" required>
+        <button type="submit">Enviar Código</button>
+    </form>
+
+    <form id="verify-form" style="display:none;">
+        <h2>Verificar Código</h2>
+        <input type="text" id="verification-code" name="verification-code" placeholder="Ingresa el Código" required>
+        <button type="submit">Verificar</button>
+    </form>
+
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            emailjs.init("PwzKJNE9maR9VlBqe"); // Reemplaza con tu Public Key de EmailJS
+        })();
+
+        let generatedCode = '';
+        let emailSentTo = '';
+
+        function generateRandomCode(length) {
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let result = '';
+            const charactersLength = characters.length;
+            for (let i = 0; i < length; i++) {
+                result += characters.charAt(Math.floor(Math.random() * charactersLength));
+            }
+            return result;
+        }
+
+        document.getElementById('contact-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            generatedCode = generateRandomCode(6); // Genera un código aleatorio de 6 caracteres
+            const email = document.getElementById('email').value;
+            emailSentTo = email; // Guarda el correo al que se envió el código
+
+            emailjs.send('service_xfhtgrn', 'template_emt3b4e', {
+                to_email: email,
+                to_name: email, // Puedes reemplazarlo con un nombre si tienes el campo
+                verification_code: generatedCode
+            }).then(function(response) {
+                alert('Código enviado con éxito!', response.status, response.text);
+                document.getElementById('contact-form').style.display = 'none';
+                document.getElementById('verify-form').style.display = 'block';
+            }, function(error) {
+                alert('Ocurrió un error al enviar el código.', error);
+            });
+        });
+
+        document.getElementById('verify-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const userCode = document.getElementById('verification-code').value;
+            const email = emailSentTo; // Utiliza el correo al que se envió el código
+
+            if (userCode === generatedCode) {
+                alert('Código verificado correctamente!');
+                window.location.href = 'https://joesedux.000webhostapp.com/';
+            } else {
+                alert('Código incorrecto. Por favor, intenta de nuevo.');
+            }
+        });
+    </script>
+</body>
+</html>

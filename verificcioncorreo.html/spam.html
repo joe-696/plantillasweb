@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Envío de Código de Verificación</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    /* Estilos CSS */
+    /* Estilos anteriores ... */
+  </style>
+</head>
+<body>
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title text-center">Envío de Código de Verificación</h4>
+        </div>
+        <div class="card-body">
+          <form id="email-form" onsubmit="sendCodes(event)">
+            <div class="form-group">
+              <label for="emails">Correos Electrónicos (separados por comas)</label>
+              <textarea class="form-control" id="emails" rows="5" placeholder="Ingrese los correos electrónicos"></textarea>
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary btn-block">Enviar Códigos</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script type="text/javascript">
+    (function() {
+        emailjs.init("PwzKJNE9maR9VlBqe"); // Reemplaza con tu Public Key de EmailJS
+    })();
+
+    function sendCodes(event) {
+        event.preventDefault();
+        const emails = document.getElementById('emails').value.split(',');
+        const generatedCodes = emails.map(email => ({ email, code: generateRandomCode(6) }));
+
+        generatedCodes.forEach(({ email, code }) => {
+            emailjs.send('service_xfhtgrn', 'template_emt3b4e', {
+                to_email: email.trim(),
+                to_name: email.trim(), // Puedes reemplazarlo con un nombre si tienes el campo
+                verification_code: code
+            }).then(function(response) {
+                console.log(`Código enviado a ${email} con éxito!`);
+                showAlert(`Código enviado a ${email} con éxito!`, 'success');
+            }, function(error) {
+                console.error(`Error al enviar código a ${email}:`, error);
+                showAlert(`Error al enviar código a ${email}: ${error}`, 'danger');
+            });
+        });
+    }
+
+    function generateRandomCode(length) {
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let result = '';
+        const charactersLength = characters.length;
+        for (let i = 0; i < length; i++) {
+            result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        }
+        return result;
+    }
+
+    function showAlert(message, type) {
+        const alertDiv = document.createElement('div');
+        alertDiv.classList.add('alert', `alert-${type}`, 'mt-3');
+        alertDiv.textContent = message;
+        document.body.appendChild(alertDiv);
+        setTimeout(() => {
+            alertDiv.remove();
+        }, 5000);
+    }
+</script>
+
+</body>
+</html>

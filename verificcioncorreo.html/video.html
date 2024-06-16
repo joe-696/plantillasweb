@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reproductor de Video</title>
+  <!-- Incluye el CSS de Video.js -->
+  <link href="https://vjs.zencdn.net/7.15.4/video-js.css" rel="stylesheet">
+  <!-- Opcional: Incluye algún tema adicional de Video.js (por ejemplo: tema oscuro) -->
+  <link href="https://vjs.zencdn.net/7.15.4/videojs-dark.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- Contenedor del reproductor de video -->
+<video id="my-video" class="video-js vjs-big-play-centered" controls preload="auto" width="640" height="360" data-setup="{}">
+  <!-- Archivo(s) de video a reproducir -->
+  <source src="tu-video.mp4" type="video/mp4">
+  <!-- Otras fuentes de video compatibles (WebM, Ogg) -->
+  <!-- <source src="tu-video.webm" type="video/webm"> -->
+  <!-- <source src="tu-video.ogg" type="video/ogg"> -->
+  <!-- Mensaje para navegadores que no soportan HTML5 video -->
+  Tu navegador no soporta la reproducción de video.
+</video>
+
+<!-- Incluye la librería de Video.js -->
+<script src="https://vjs.zencdn.net/7.15.4/video.min.js"></script>
+
+<!-- Configuración y personalización opcional de Video.js -->
+<script>
+  // Configuración básica (puedes personalizar más según la documentación)
+  document.addEventListener('DOMContentLoaded', function() {
+    var player = videojs('my-video', {
+      fluid: true, // El video se adapta al tamaño del contenedor
+      autoplay: false, // Reproducción automática desactivada
+      controls: true, // Muestra los controles del reproductor
+      preload: 'auto', // Precarga automática del video
+      responsive: true // Hace que el reproductor sea responsive
+    });
+  });
+</script>
+
+</body>
+</html>

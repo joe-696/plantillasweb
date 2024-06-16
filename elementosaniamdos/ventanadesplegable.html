@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ventana Desplegable</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    .overlay {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        overflow-y: hidden;
+        transition: 0.5s;
+    }
+
+    .overlay-content {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        background-color: #f1f1f1;
+        overflow: auto;
+        padding: 20px;
+        box-sizing: border-box;
+        transform: translateY(100%);
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .overlay.active {
+        height: 100%;
+    }
+
+    .overlay.active .overlay-content {
+        transform: translateY(0);
+    }
+
+    .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 24px;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+
+<button onclick="openOverlay()">Abrir Ventana Desplegable</button>
+
+<div id="myOverlay" class="overlay">
+  <div class="overlay-content">
+    <span class="close-btn" onclick="closeOverlay()">&times;</span>
+    <h2>Contenido de la Ventana Desplegable</h2>
+    <p>¡Hola! Este es un ejemplo de contenido dentro de una ventana desplegable. Puedes colocar cualquier contenido aquí, como formularios, imágenes, videos, etc.</p>
+  </div>
+</div>
+
+<script>
+function openOverlay() {
+    document.getElementById("myOverlay").classList.add("active");
+}
+
+function closeOverlay() {
+    document.getElementById("myOverlay").classList.remove("active");
+}
+</script>
+
+</body>
+</html>

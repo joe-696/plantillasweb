@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ventana Emergente Moderna</title>
+  <!-- CDN de React y ReactDOM -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.development.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.development.js"></script>
+  <!-- Estilos CSS -->
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .modal {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      max-width: 80%;
+      opacity: 0;
+      transform: translateY(-50px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .modal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .close-button {
+      background: none;
+      border: none;
+      color: #999;
+      font-size: 20px;
+      cursor: pointer;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<div id="modal-root"></div>
+
+<script>
+  // Componente de React para la ventana emergente
+  function Modal({ onClose }) {
+    return (
+      <div className="modal active">
+        <button className="close-button" onClick={onClose}>&times;</button>
+        <h2>Contenido de la Ventana Emergente</h2>
+        <p>¡Bienvenido! Este es un contenido interesante en la ventana emergente.</p>
+        <button onClick={onClose}>Cerrar</button>
+      </div>
+    );
+  }
+
+  // Componente principal que renderiza la ventana emergente
+  function App() {
+    const handleClose = () => {
+      const modalRoot = document.getElementById('modal-root');
+      ReactDOM.unmountComponentAtNode(modalRoot);
+    };
+
+    return (
+      <Modal onClose={handleClose} />
+    );
+  }
+
+  // Renderizar la aplicación en el div modal-root
+  const modalRoot = document.getElementById('modal-root');
+  ReactDOM.render(<App />, modalRoot);
+</script>
+
+</body>
+</html>

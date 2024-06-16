@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ventana Emergente Moderna</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+  }
+
+  .popup-container {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 9999;
+  }
+
+  .popup-content {
+    background-color: #fff;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding: 20px;
+    animation: slideInUp 0.5s ease;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    color: #fff;
+    font-size: 20px;
+    transition: color 0.3s ease;
+  }
+
+  .close-btn:hover {
+    color: #ccc;
+  }
+
+  @keyframes slideInUp {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="popup-container" id="popupContainer">
+  <div class="popup-content animate__animated animate__fadeIn">
+    <span class="close-btn" onclick="closePopup()">&times;</span>
+    <h2>¡Bienvenido!</h2>
+    <p>Gracias por visitarnos. Esperamos que disfrutes de tu experiencia en nuestro sitio.</p>
+    <button onclick="closePopup()">Cerrar</button>
+  </div>
+</div>
+
+<script>
+  // Mostrar la ventana emergente al cargar la página
+  window.onload = function() {
+    document.getElementById("popupContainer").style.display = "block";
+  };
+
+  // Cerrar la ventana emergente
+  function closePopup() {
+    document.getElementById("popupContainer").style.display = "none";
+  }
+</script>
+
+</body>
+</html>

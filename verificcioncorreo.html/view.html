@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modern Popup</title>
+  <!-- Estilos CSS -->
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .popup-container {
+      background-color: rgba(0, 0, 0, 0.5);
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .popup-content {
+      background-color: #fff;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+      max-width: 80%;
+      text-align: center;
+      transform: translateY(50px);
+      transition: transform 0.3s ease;
+    }
+
+    .show-popup {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .show-popup .popup-content {
+      transform: translateY(0);
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      cursor: pointer;
+    }
+
+    .spinner-container {
+      display: none;
+      justify-content: center;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    .spinner-text {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .spinner-dots {
+      display: flex;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      background-color: #007bff;
+      border-radius: 50%;
+      margin: 0 5px;
+      animation: bounce 1s infinite;
+      animation-delay: calc(0.1s * var(--delay));
+    }
+
+    @keyframes bounce {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+      100% { transform: translateY(0); }
+    }
+
+    .spinner {
+      display: none; /* Ocultamos el círculo */
+    }
+
+    form {
+      margin-top: 20px;
+    }
+
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ddd;
+      border-radius: 3px;
+    }
+
+    button {
+      background-color: #28a745;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #218838;
+    }
+  </style>
+</head>
+<body>
+
+<div class="popup-container" id="popupContainer">
+  <div class="popup-content">
+
+    <form id="contact-form" onsubmit="sendCode(event)">
+        <h2>Enviar Código de Verificación</h2>
+        <input type="email" id="email" name="email" placeholder="Tu Email" required>
+        <button type="submit" id="send-code-btn">Enviar Código</button>
+        <div class="spinner-container" id="spinnerContainer">
+          <div class="spinner-text">Por favor, espere</div>
+          <div class="spinner-dots">
+            <div class="dot" style="--delay: 1;"></div>
+            <div class="dot" style="--delay: 2;"></div>
+            <div class="dot" style="--delay: 3;"></div>
+          </div>
+        </div>
+    </form>
+
+    <form id="verify-form" style="display:none;">
+        <h2>Verificar Código</h2>
+        <input type="text" id="verification-code" name="verification-code" placeholder="Ingresa el Código" required>
+        <button type="submit">Verificar</button>
+    </form>
+  </div>
+</div>
+
+<button onclick="openPopup()">Abrir Popup</button>
+
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script type="text/javascript">
+    (function() {
+        emailjs.init("PwzKJNE9maR9VlBqe"); // Reemplaza con tu Public Key de EmailJS
+    })();
+
+    let generatedCode = '';
+    let emailSentTo = '';
+
+    function generateRandomCode(length) {
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let result = '';
+        const charactersLength = characters.length;
+        for (let i = 0; i < length; i++) {
+            result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        }
+        return result;
+    }
+
+    function openPopup() {
+        const popup = document.getElementById('popupContainer');
+        popup.classList.add('show-popup');
+    }
+
+    function closePopup() {
+        const popup = document.getElementById('popupContainer');
+        popup.classList.remove('show-popup');
+    }
+
+    function sendCode(event) {
+      event.preventDefault();
+      const email = document.getElementById('email').value;
+      if (!email) {
+        alert('Por favor ingresa tu correo electrónico.');
+        return;
+      }
+      document.getElementById('send-code-btn').style.display = 'none';
+      document.getElementById('spinnerContainer').style.display = 'flex';
+      generatedCode = generateRandomCode(6); // Genera un código aleatorio de 6 caracteres
+      emailSentTo = email; // Guarda el correo al que se envió el código
+      emailjs.send('service_xfhtgrn', 'template_emt3b4e', {
+          to_email: email,
+          to_name: email, // Puedes reemplazarlo con un nombre si tienes el campo
+          verification_code: generatedCode
+      }).then(function(response) {
+          alert('Código enviado con éxito!', response.status, response.text);
+          document.getElementById('contact-form').style.display = 'none';
+          document.getElementById('verify-form').style.display = 'block';
+      }, function(error) {
+          alert('Ocurrió un error al enviar el código.', error);
+          document.getElementById('send-code-btn').style.display = 'block';
+          document.getElementById('send-code-btn').style.display = 'block';
+          document.getElementById('spinnerContainer').style.display = 'none';
+      });
+    }
+
+    document.getElementById('verify-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const userCode = document.getElementById('verification-code').value;
+        const email = emailSentTo; // Utiliza el correo al que se envió el código
+
+        if (userCode === generatedCode) {
+            alert('Código verificado correctamente!');
+            closePopup(); // Cierra la ventana emergente si el código es correcto
+            // Aquí puedes agregar cualquier otra acción que desees realizar después de verificar el código correctamente
+        } else {
+            alert('Código incorrecto. Por favor, intenta de nuevo.');
+        }
+    });
+</script>
+
+</body>
+</html>
+
+
+
+<script type="text/javascript">
+    (function() {
+        emailjs.init("PwzKJNE9maR9VlBqe"); // Reemplaza con tu Public Key de EmailJS
+    })();
+
+    let generatedCode = '';
+    let emailSentTo = '';
+
+    function generateRandomCode(length) {
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let result = '';
+        const charactersLength = characters.length;
+        for (let i = 0; i < length; i++) {
+            result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        }
+        return result;
+    }
+
+    function openPopup() {
+        const popup = document.getElementById('popupContainer');
+        popup.classList.add('show-popup');
+    }
+
+    function closePopup() {
+        const popup = document.getElementById('popupContainer');
+        popup.classList.remove('show-popup');
+    }
+
+    function sendCode(event) {
+        event.preventDefault();
+        const email = document.getElementById('email').value;
+        if (!email) {
+            alert('Por favor ingresa tu correo electrónico.');
+            return;
+        }
+        document.getElementById('send-code-btn').style.display = 'none';
+        document.getElementById('spinnerContainer').style.display = 'flex';
+        generatedCode = generateRandomCode(6); // Genera un código aleatorio de 6 caracteres
+        emailSentTo = email; // Guarda el correo al que se envió el código
+        emailjs.send('service_xfhtgrn', 'template_emt3b4e', {
+            to_email: email,
+            to_name: email, // Puedes reemplazarlo con un nombre si tienes el campo
+            verification_code: generatedCode
+        }).then(function(response) {
+            alert('Código enviado con éxito!', response.status, response.text);
+            document.getElementById('contact-form').style.display = 'none';
+            document.getElementById('verify-form').style.display = 'block';
+        }, function(error) {
+            alert('Ocurrió un error al enviar el código.', error);
+            document.getElementById('send-code-btn').style.display = 'block';
+            document.getElementById('spinnerContainer').style.display = 'none';
+        });
+    }
+
+    document.getElementById('verify-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const userCode = document.getElementById('verification-code').value;
+        const email = emailSentTo; // Utiliza el correo al que se envió el código
+
+        if (userCode === generatedCode) {
+            alert('Código verificado correctamente!');
+            closePopup(); // Cierra la ventana emergente si el código es correcto
+            // Aquí puedes agregar cualquier otra acción que desees realizar después de verificar el código correctamente
+        } else {
+            alert('Código incorrecto. Por favor, intenta de nuevo.');
+        }
+    });
+</script>

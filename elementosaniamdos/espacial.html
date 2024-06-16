@@ -43,15 +43,14 @@
 </head>
 <body>
 <div id="info">
-    <h1>Bienvenido a la Experiencia 3D</h1>
-    <p>Explora esta innovadora simulación de partículas en un espacio tridimensional.</p>
+    <h1>lharryew me mama el huevo</h1>
+    <p>¡con bolas y todo, se l emboca!</p>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
     let camera, scene, renderer;
     let particles, particleCount = 1000;
     let mouseX = 0, mouseY = 0;
-    let isMouseDown = false;
 
     init();
     animate();
@@ -86,24 +85,12 @@
         document.body.appendChild(renderer.domElement);
 
         document.addEventListener('mousemove', onDocumentMouseMove);
-        document.addEventListener('mousedown', onDocumentMouseDown);
-        document.addEventListener('mouseup', onDocumentMouseUp);
         window.addEventListener('resize', onWindowResize);
     }
 
     function onDocumentMouseMove(event) {
-        if (isMouseDown) {
-            mouseX = (event.clientX - window.innerWidth / 2) / 2;
-            mouseY = (event.clientY - window.innerHeight / 2) / 2;
-        }
-    }
-
-    function onDocumentMouseDown() {
-        isMouseDown = true;
-    }
-
-    function onDocumentMouseUp() {
-        isMouseDown = false;
+        mouseX = (event.clientX - window.innerWidth / 2) / 2;
+        mouseY = (event.clientY - window.innerHeight / 2) / 2;
     }
 
     function onWindowResize() {
@@ -115,10 +102,8 @@
     function animate() {
         requestAnimationFrame(animate);
 
-        if (isMouseDown) {
-            particles.rotation.x += 0.005;
-            particles.rotation.y += 0.005;
-        }
+        particles.rotation.x += 0.0005;
+        particles.rotation.y += 0.0005;
 
         camera.position.x += (mouseX - camera.position.x) * 0.05;
         camera.position.y += (-mouseY - camera.position.y) * 0.05;

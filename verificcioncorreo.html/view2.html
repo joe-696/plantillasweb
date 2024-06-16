@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modern Popup</title>
+  <!-- Estilos CSS -->
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .popup-container {
+      background-color: rgba(0, 0, 0, 0.5);
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .popup-content {
+      background-color: #fff;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+      max-width: 80%;
+      text-align: center;
+      transform: translateY(50px);
+      transition: transform 0.3s ease;
+    }
+
+    .show-popup {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .show-popup .popup-content {
+      transform: translateY(0);
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      cursor: pointer;
+    }
+
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ddd;
+      border-radius: 3px;
+    }
+
+    button {
+      background-color: #28a745;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #218838;
+    }
+
+    .spinner-container {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      display: none; /* Ocultamos el spinner por defecto */
+    }
+
+    .spinner-text {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .spinner-dots {
+      display: flex;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      background-color: #007bff;
+      border-radius: 50%;
+      margin: 0 5px;
+      animation: bounce 1s infinite;
+      animation-delay: calc(0.1s * var(--delay));
+    }
+
+    @keyframes bounce {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+      100% { transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+<div class="popup-container" id="popupContainer">
+  <div class="popup-content">
+    <form id="contact-form">
+        <h2>Enviar Código de Verificación</h2>
+        <input type="email" id="email" name="email" placeholder="Tu Email" required>
+        <button id="sendCodeBtn" type="submit">Enviar Código</button>
+        <div class="spinner-container" id="spinnerContainer">
+          <div class="spinner-text">Por favor, espere</div>
+          <div class="spinner-dots">
+            <div class="dot" style="--delay: 1;"></div>
+            <div class="dot" style="--delay: 2;"></div>
+            <div class="dot" style="--delay: 3;"></div>
+          </div>
+        </div>
+    </form>
+
+    <form id="verify-form" style="display:none;">
+        <h2>Verificar Código</h2>
+        <input type="text" id="verification-code" name="verification-code" placeholder="Ingresa el Código" required>
+        <button type="submit">Verificar</button>
+    </form>
+    <button onclick="closePopup()">Cerrar</button>
+  </div>
+</div>
+
+<button onclick="openPopup()">Abrir Popup</button>
+
+<script>
+  function openPopup() {
+    const popup = document.getElementById('popupContainer');
+    popup.classList.add('show-popup');
+  }
+
+  function closePopup() {
+    const popup = document.getElementById('popupContainer');
+    popup.classList.remove('show-popup');
+  }
+
+  // Cuando el formulario se envía, mostrar el spinner y ocultar el botón
+  document.getElementById('contact-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    
+    const spinnerContainer = document.getElementById('spinnerContainer');
+    spinnerContainer.style.display = 'flex';
+
+    const sendCodeBtn = document.getElementById('sendCodeBtn');
+    sendCodeBtn.style.display = 'none';
+
+    const generatedCode = generateRandomCode(6); // Genera un código aleatorio de 6 caracteres
+    const email = document.getElementById('email').value;
+    
+    // Aquí puedes agregar la lógica para enviar el código por correo electrónico
+  });
+
+  // Función para generar un código aleatorio
+  function generateRandomCode(length) {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+    const charactersLength = characters.length;
+    for (let i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+  }
+</script>
+
+</body>
+</html>
