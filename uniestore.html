@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Aplicación Store</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .app-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-start;
+            margin-top: 60px; /* Compensate for fixed header */
+            padding: 20px;
+        }
+        .app-card {
+            width: 300px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            margin: 15px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .app-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .app-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+        .app-card-content {
+            padding: 15px;
+            flex: 1;
+        }
+        .app-card h3 {
+            margin-top: 10px;
+            font-size: 1.5rem;
+            color: #333;
+        }
+        .app-card p {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        .app-card a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .app-card a:hover {
+            background-color: #0056b3;
+        }
+
+        * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      color: #333;
+    }
+
+    .popup-container {
+      position: fixed;
+      bottom: -100%;
+      left: 0;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 20px;
+      box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+      z-index: 999;
+      transition: bottom 0.5s ease-in-out;
+    }
+
+    .popup-container.show {
+      bottom: 0;
+    }
+
+    .popup-content {
+      background-color: #ffeb3b;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      animation: popupFadeIn 1s;
+    }
+
+    @keyframes popupFadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+      color: #000;
+      font-size: 18px;
+    }
+
+    button {
+      background-color: #f44336;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #d32f2f;
+    }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>UniStore</h1>
+</div>
+<br>
+<div class="app-container" id="appContainer">
+    <!-- Aquí se insertarán las tarjetas de las aplicaciones -->
+</div>
+<div class="popup-container" id="popupContainer">
+    <div class="popup-content">
+      <span class="close-btn" onclick="closePopup()">&#10006;</span>
+      <h2>¡Bienvenido!</h2>
+      <p>Gracias por visitar nuestro UniStore. Cualquier uso mal intencionaod o especial, sera sancionado con pena privativa de ibertad no menor de 3 perpetuas y no mayor de 5 perpetuas y 5 dias, gracias por visitar UniStore!.</p>
+      <button onclick="closePopup()">Cerrar</button>
+    </div>
+  </div>
+  <script>
+    // Función para abrir la ventana emergente
+    function openPopup() {
+      document.getElementById("popupContainer").classList.add("show");
+    }
+
+    // Función para cerrar la ventana emergente
+    function closePopup() {
+      document.getElementById("popupContainer").classList.remove("show");
+      localStorage.setItem('popupShown', 'true');
+    }
+
+    // Verificar si la ventana emergente ya se mostró
+    if (!localStorage.getItem('popupShown')) {
+      // Abrir la ventana emergente después de un tiempo (por ejemplo, 5 segundos)
+      setTimeout(openPopup, 3000);
+    }
+  </script>
+
+<script>
+    // Definición de datos de las aplicaciones
+    const apps = [
+        {
+            name: "UniRed",
+            description: "Un lugar donde estaras enterado de cualquier acontencimiento en la unas",
+            image: "https://i.ibb.co/jJgt0sG/Screenshot-2024-06-17-033418.png", // Enlace a la imagen de la app
+            link: "https://unired-f2cdb08de86c.herokuapp.com/publicaciones" // Enlace a la aplicación web
+        },
+        {
+            name: "UnasOrganizadas",
+            description: "UnasOrganizadas te ayudara a gestionar tu tiempo en la universidad. basada en estudios!",
+            image: "https://i.ibb.co/zmDxLKQ/unasorganizadas.png", // Enlace a la imagen de la app
+            link: "https://organizacionjoe.000webhostapp.com/" // Enlace a la aplicación web
+        },
+        {
+            name: "UnosCursos",
+            description: "organiza tus cursos, y tu tiempo",
+            image: "https://i.ibb.co/bg7g7mb/image.png", // Enlace a la imagen de la app
+            link: "https://joesedux.000webhostapp.com/" // Enlace a la aplicación web
+        },
+        {
+            name: "UnasEspiadas",
+            description: "con quien esta?. toma fotos y espia",
+            image: "https://i.ibb.co/QnLxTRH/Screenshot-2024-06-17-034244.png", // Enlace a la imagen de la app
+            link: "https://agamkosladiferencia.000webhostapp.com/" // Enlace a la aplicación web
+        },
+        {
+            name: "UnosSpameos",
+            description: "envia correos de manera anonima a cualquier usario",
+            image: "https://i.ibb.co/nkzpQLd/Screenshot-2024-06-17-034519.png", // Enlace a la imagen de la app
+            link: "https://pruebagogo.000webhostapp.com/" // Enlace a la aplicación web
+        },
+        {
+            name: "Yakpe",
+            description: "esto es con fines de educacion, ante estafas, y los fines con los que se use depende de el ussuario",
+            image: "https://i.ibb.co/Jr94DZx/image.png", // Enlace a la imagen de la app
+            link: "https://yakpe.000webhostapp.com/" // Enlace a la aplicación web
+        }
+        // Puedes agregar más aplicaciones según sea necesario
+    ];
+
+    // Función para mostrar las tarjetas de aplicaciones
+    function renderApps() {
+        const appContainer = document.getElementById("appContainer");
+
+        apps.forEach(app => {
+            const appCard = document.createElement("div");
+            appCard.classList.add("app-card");
+
+            const appImage = document.createElement("img");
+            appImage.src = app.image;
+            appImage.alt = app.name;
+
+            const appCardContent = document.createElement("div");
+            appCardContent.classList.add("app-card-content");
+
+            const appName = document.createElement("h3");
+            appName.textContent = app.name;
+
+            const appDescription = document.createElement("p");
+            appDescription.textContent = app.description;
+
+            const appLink = document.createElement("a");
+            appLink.href = app.link;
+            appLink.textContent = "Abrir App";
+            appLink.setAttribute("target", "_blank"); // Abre en una nueva pestaña
+
+            appCardContent.appendChild(appName);
+            appCardContent.appendChild(appDescription);
+            appCardContent.appendChild(appLink);
+
+            appCard.appendChild(appImage);
+            appCard.appendChild(appCardContent);
+
+            appContainer.appendChild(appCard);
+        });
+    }
+
+    // Llamar a la función para renderizar las aplicaciones
+    renderApps();
+</script>
+
+</body>
+</html>
+
+

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Cursos</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        .course-card {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .course-card h5 {
+            font-weight: bold;
+        }
+
+        .course-card p {
+            color: #6c757d;
+        }
+
+        .course-card a {
+            transition: color 0.3s ease;
+        }
+
+        .course-card a:hover {
+            color: #0056b3;
+        }
+
+        .jumbotron {
+            background-image: linear-gradient(120deg, #3498db, #8e44ad);
+            color: #fff;
+            text-align: center;
+            padding: 50px 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .btn-primary {
+            background-color: #ff7675;
+            border-color: #ff7675;
+        }
+
+        .btn-primary:hover {
+            background-color: #d63031;
+            border-color: #d63031;
+        }
+
+        .lead {
+            font-size: 24px;
+        }
+
+        .typing-animation::after {
+            content: '|';
+            animation: blink 0.75s infinite alternate;
+        }
+
+        @keyframes blink {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="jumbotron animate__animated animate__fadeInDown">
+        <h1 class="display-4">Gestión de cursos</h1>
+        <p class="lead">Aproechar el tiempo, universidad full estudio, horario de estudio(estudiar), en descanzo descanzar</p>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card course-card animate__animated animate__fadeInUp" data-toggle="modal" data-target="#curso1Modal">
+                    <div class="card-body">
+                        <h5 class="card-title">Redes y conectividad 1</h5>
+                        <p class="card-text">Curso sobre álgebra, cálculo y geometría.</p>
+                        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#curso1Modal">Ver detalles</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card course-card animate__animated animate__fadeInUp" data-toggle="modal" data-target="#curso2Modal">
+                    <div class="card-body">
+                        <h5 class="card-title">Curso 2: Gestion de base de datos</h5>
+                        <p class="card-text">Curso sobre mecánica, electromagnetismo y óptica.</p>
+                        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#curso2Modal">Ver detalles</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card course-card animate__animated animate__fadeInUp" data-toggle="modal" data-target="#curso3Modal">
+                    <div class="card-body">
+                        <h5 class="card-title">Curso 3: Pensamiento Sistemico</h5>
+                        <p class="card-text">Curso sobre fundamentos de programación y algoritmos.</p>
+                        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#curso3Modal">Ver detalles</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card course-card animate__animated animate__fadeInUp" data-toggle="modal" data-target="#curso4Modal">
+                    <div class="card-body">
+                        <h5 class="card-title">Curso 4: Ingenieria de Requisitos</h5>
+                        <p class="card-text">Curso sobre química general e inorgánica.</p>
+                        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#curso4Modal">Ver detalles</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card course-card animate__animated animate__fadeInUp" data-toggle="modal" data-target="#curso5Modal">
+                    <div class="card-body">
+                        <h5 class="card-title">Curso 5: Matematica discreta</h5>
+                        <p class="card-text">Curso sobre biología celular y molecular.</p>
+                        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#curso5Modal">Ver detalles</a>
+                    </div>
+                </div>
+            </div>
+         <!--
+            <div class="col-md-4">
+                <div class="card course-card animate__animated animate__fadeInUp" data-toggle="modal" data-target="#curso6Modal">
+                    <div class="card-body">
+                        <h5 class="card-title">Curso 6: Historia</h5>
+                        <p class="card-text">Curso sobre historia mundial y contemporánea.</p>
+                        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#curso6Modal">Ver detalles</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card course-card animate__animated animate__fadeInUp" data-toggle="modal" data-target="#curso7Modal">
+                    <div class="card-body">
+                        <h5 class="card-title">Curso 7: Literatura</h5>
+                        <p class="card-text">Curso sobre literatura clásica y moderna.</p>
+                        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#curso7Modal">Ver detalles</a>
+                    </div>
+                </div>
+            </div>
+         -->
+        </div>
+    </div>
+
+    <!-- Modales de cursos -->
+    <div class="modal fade" id="curso1Modal" tabindex="-1" role="dialog" aria-labelledby="curso1ModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="curso1ModalLabel">Redes y conectividad 1</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Este curso cubre los fundamentos de redes y conectividad, incluyendo álgebra, cálculo y geometría aplicados.</p>
+                    <p>Puedes acceder a más detalles y notas en <a href="https://www.notion.so/Redes-y-Conectividad-1-f246041d55c942ef887e52c9f2f742f9" target="_blank">Notion</a>.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <a href="https://www.notion.so/Redes-y-Conectividad-1-f246041d55c942ef887e52c9f2f742f9" target="_blank" class="btn btn-primary">Ver en Notion</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="curso2Modal" tabindex="-1" role="dialog" aria-labelledby="curso2ModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="curso2ModalLabel">Curso 2: Física</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Este curso abarca temas avanzados de física, incluyendo mecánica, electromagnetismo y óptica.</p>
+                    <p>Puedes acceder a más detalles y notas en <a href="https://notion.so/tu-enlace-fisica" target="_blank">Notion</a>.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <a href="https://www.notion.so/Gestion-de-Bases-de-Datos-a7f742f903504c3d90cfcb997bcd898a" target="_blank" class="btn btn-primary">Ver en Notion</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="curso3Modal" tabindex="-1" role="dialog" aria-labelledby="curso3ModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="curso3ModalLabel">Curso 3: Programación</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img src="https://i.ibb.co/64RgpFs/Untitled.png" class="img-fluid rounded" style="max-height: 400px;" alt="Imagen del curso">
+                    <p>Este curso cubre los fundamentos de la programación, incluyendo algoritmos y estructuras de datos.</p>
+                    <p>para mas detalles acceda al silabo <a href="https://www.dropbox.com/scl/fi/jrln88flyqttozod8kreo/2024-1_IS040202A-PENSAMIENTO-SISTEMICO-2.pdf?rlkey=4iwsml0g6psnx3x3yspscdzms&st=einlnbaw&dl=0" target="_blank">Ver silabo</a>.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <a href="https://www.notion.so/Pensamiento-sistemico-37cff43be9a14e7c9dbe2330fb971ab7" target="_blank" class="btn btn-primary">Ver en Notion</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="curso4Modal" tabindex="-1" role="dialog" aria-labelledby="curso4ModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="curso4ModalLabel">Curso 4: Química</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Este curso aborda los principios generales de la química y su aplicación en la vida cotidiana.</p>
+                    <p>Puedes acceder a más detalles y notas en <a href="https://notion.so/tu-enlace-quimica" target="_blank">Notion</a>.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <a href="https://notion.so/tu-enlace-quimica" target="_blank" class="btn btn-primary">Ver en Notion</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="curso5Modal" tabindex="-1" role="dialog" aria-labelledby="curso5ModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="curso5ModalLabel">Curso 5: Biología</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Este curso se enfoca en la biología celular y molecular, explorando los fundamentos de la vida.</p>
+                    <p>Puedes acceder a más detalles y notas en <a href="https://notion.so/tu-enlace-biologia" target="_blank">Notion</a>.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <a href="https://notion.so/tu-enlace-biologia" target="_blank" class="btn btn-primary">Ver en Notion</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal fade" id="curso6Modal" tabindex="-1" role="dialog" aria-labelledby="curso6ModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="curso6ModalLabel">Curso 6: Historia</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Este curso abarca la historia mundial y contemporánea, explorando eventos clave y sus repercusiones.</p>
+                    <p>Puedes acceder a más detalles y notas en <a href="https://notion.so/tu-enlace-historia" target="_blank">Notion</a>.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <a href="https://notion.so/tu-enlace-historia" target="_blank" class="btn btn-primary">Ver en Notion</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="curso7Modal" tabindex="-1" role="dialog" aria-labelledby="curso7ModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="curso7ModalLabel">Curso 7: Literatura</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Este curso aborda obras clásicas y modernas de la literatura, analizando su impacto cultural.</p>
+                    <p>Puedes acceder a más detalles y notas en <a href="https://notion.so/tu-enlace-literatura" target="_blank">Notion</a>.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <a href="https://notion.so/tu-enlace-literatura" target="_blank" class="btn btn-primary">Ver en Notion</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS, Popper.js, jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Font Awesome JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+</body>
+</html>
