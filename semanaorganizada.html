@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Organizador Semanal</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      background-color: #fff;
+      padding: 20px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 36px;
+      color: #007bff;
+    }
+
+    .week-info {
+      text-align: center;
+      margin-bottom: 10px;
+      font-size: 18px;
+      color: #6c757d;
+    }
+
+    .d-flex {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .day-column {
+      flex: 1;
+      min-width: 150px;
+      padding: 10px;
+      margin: 10px;
+      background-color: #f8f9fa;
+      border-radius: 8px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+      border: 1px solid #ddd;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      position: relative; /* Para posicionar el modal */
+    }
+
+    .day-column:hover {
+      background-color: #e9ecef;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .day-header {
+      text-align: center;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: #343a40;
+      font-size: 20px;
+      border-bottom: 2px solid #007bff;
+      padding-bottom: 5px;
+    }
+
+    .task {
+      background-color: #007bff;
+      color: #fff;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      text-align: center;
+      transition: background-color 0.3s ease, transform 0.3s ease, text-decoration 0.3s ease;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      position: relative;
+    }
+
+    .task.completed {
+      text-decoration: line-through;
+      background-color: #6c757d;
+    }
+
+    .task:hover {
+      background-color: #0056b3;
+      transform: scale(1.05);
+    }
+
+    .delete-btn {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      color: #fff;
+      background-color: rgba(0, 0, 0, 0.5);
+      border: none;
+      padding: 5px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .delete-btn:hover {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    /* Estilos para el modal */
+    .modal-content {
+      padding: 20px;
+      border-radius: 8px;
+    }
+
+    .modal-header {
+      border-bottom: none;
+    }
+
+    .modal-footer {
+      border-top: none;
+    }
+
+    /* Estilos para el botón de fecha */
+    #calendarBtn {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 20px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    #calendarBtn:hover {
+      background-color: #0056b3;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Organizador Semanal</h1>
+  <div class="week-info" id="weekInfoText">
+    Semana del 21 de junio al 27 de junio
+  </div>
+  <div class="d-flex">
+    <div id="monday" class="day-column">
+      <div class="day-header">Lunes</div>
+    </div>
+    <div id="tuesday" class="day-column">
+      <div class="day-header">Martes</div>
+    </div>
+    <div id="wednesday" class="day-column">
+      <div class="day-header">Miércoles</div>
+    </div>
+    <div id="thursday" class="day-column">
+      <div class="day-header">Jueves</div>
+    </div>
+    <div id="friday" class="day-column">
+      <div class="day-header">Viernes</div>
+    </div>
+    <div id="saturday" class="day-column">
+      <div class="day-header">Sábado</div>
+    </div>
+    <div id="sunday" class="day-column">
+      <div class="day-header">Domingo</div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para agregar tarea -->
+<div class="modal fade" id="addTaskModal" tabindex="-1" aria-labelledby="addTaskModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addTaskModalLabel">Agregar Nueva Tarea</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="taskInput" class="form-label">Nombre de la Tarea</label>
+          <input type="text" class="form-control" id="taskInput" placeholder="Ingrese el nombre de la tarea">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" id="saveTaskBtn">Guardar Tarea</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Botón para seleccionar fecha -->
+<div class="text-center mb-3">
+  <button type="button" id="calendarBtn">Seleccionar Fecha</button>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Configuración de Flatpickr para el calendario
+    var calendarBtn = document.getElementById('calendarBtn');
+    var calendar = flatpickr(calendarBtn, {
+      dateFormat: 'd F Y',
+      defaultDate: new Date(),
+      onClose: function(selectedDates, dateStr, instance) {
+        if (selectedDates.length > 0) {
+          updateWeekInfo(selectedDates[0]);
+          saveSelectedDate(dateStr);
+        }
+      }
+    });
+
+    // Función para actualizar la información de la semana
+    function updateWeekInfo(selectedDate) {
+      var startDate = new Date(selectedDate);
+      startDate.setDate(startDate.getDate() - startDate.getDay() + 1); // Lunes de la semana seleccionada
+      var endDate = new Date(startDate);
+      endDate.setDate(endDate.getDate() + 6); // Domingo de la semana seleccionada
+
+      var startDay = startDate.getDate();
+      var startMonth = startDate.toLocaleString('es', { month: 'long' });
+      var endDay = endDate.getDate();
+      var endMonth = endDate.toLocaleString('es', { month: 'long' });
+
+      var weekInfoText = 'Semana del ' + startDay + ' de ' + startMonth + ' al ' + endDay + ' de ' + endMonth;
+      document.getElementById('weekInfoText').textContent = weekInfoText;
+    }
+
+    // Función para guardar la fecha seleccionada en el almacenamiento local
+    function saveSelectedDate(dateStr) {
+      localStorage.setItem('selectedDate', dateStr);
+    }
+
+    // Cargar la fecha seleccionada previamente del almacenamiento local
+    var savedDate = localStorage.getItem('selectedDate');
+    if (savedDate) {
+      calendar.setDate(savedDate);
+      updateWeekInfo(new Date(savedDate));
+    }
+
+    var days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+    days.forEach(function(day, index) {
+      var sortable = new Sortable(document.getElementById(day), {
+        group: 'shared',
+        animation: 150,
+        onEnd: function(evt) {
+          console.log('Evento movido de', evt.from.id, 'a', evt.to.id);
+          saveTasksToLocalStorage(evt.from.id);
+          saveTasksToLocalStorage(evt.to.id);
+        }
+      });
+
+      // Cargar tareas guardadas del almacenamiento local
+      loadTasks(day);
+
+      // Agregar listener para marcar tarea como completada al hacer clic
+      sortable.el.addEventListener('click', function(e) {
+        if (e.target.classList.contains('task')) {
+          e.target.classList.toggle('completed');
+
+          // Guardar estado de completado en almacenamiento local
+          saveTasksToLocalStorage(day);
+        }
+      });
+
+      // Agregar listener para mostrar el modal al hacer clic en una parte blanca de la columna
+      sortable.el.addEventListener('click', function(e) {
+        if (!e.target.closest('.task')) {
+          var columnId = e.currentTarget.id;
+          var addTaskModal = new bootstrap.Modal(document.getElementById('addTaskModal'), {
+            keyboard: false
+          });
+          addTaskModal.show();
+
+          // Guardar tarea al hacer clic en "Guardar Tarea"
+          document.getElementById('saveTaskBtn').addEventListener('click', function() {
+            var taskInput = document.getElementById('taskInput').value.trim();
+            if (taskInput) {
+              var task = document.createElement('div');
+              task.classList.add('task');
+              task.setAttribute('draggable', true);
+              task.textContent = taskInput;
+
+              // Agregar botón para eliminar tarea
+              var deleteBtn = document.createElement('button');
+              deleteBtn.classList.add('delete-btn');
+              deleteBtn.innerHTML = '&times;';
+              deleteBtn.addEventListener('click', function() {
+                task.remove();
+                saveTasksToLocalStorage(columnId); // Guardar cambios al eliminar tarea
+              });
+              task.appendChild(deleteBtn);
+
+              document.getElementById(columnId).appendChild(task);
+              addTaskModal.hide();
+              document.getElementById('taskInput').value = '';
+
+              // Guardar tarea en almacenamiento local
+              saveTasksToLocalStorage(columnId);
+            }
+          });
+        }
+      });
+
+      // Ajustar el orden de los días según la semana de Lunes a Domingo
+      var dayIndex = (index + 1) % 7; // Domingo en la posición 7
+      var dayElement = document.getElementById(day);
+      dayElement.parentNode.insertBefore(dayElement, dayElement.parentNode.children[dayIndex]);
+    });
+
+    // Función para cargar tareas desde el almacenamiento local
+    function loadTasks(columnId) {
+      var tasks = JSON.parse(localStorage.getItem(columnId)) || [];
+      tasks.forEach(function(taskText) {
+        var task = document.createElement('div');
+        task.classList.add('task');
+        task.textContent = taskText;
+
+        // Agregar botón para eliminar tarea
+        var deleteBtn = document.createElement('button');
+        deleteBtn.classList.add('delete-btn');
+        deleteBtn.innerHTML = '&times;';
+        deleteBtn.addEventListener('click', function() {
+          task.remove();
+          saveTasksToLocalStorage(columnId); // Guardar cambios al eliminar tarea
+        });
+        task.appendChild(deleteBtn);
+
+        document.getElementById(columnId).appendChild(task);
+      });
+    }
+
+    // Función para guardar tareas en el almacenamiento local
+    function saveTasksToLocalStorage(columnId) {
+      var tasks = [];
+      var taskElements = document.getElementById(columnId).getElementsByClassName('task');
+      for (var i = 0; i < taskElements.length; i++) {
+        tasks.push(taskElements[i].textContent);
+      }
+      localStorage.setItem(columnId, JSON.stringify(tasks));
+    }
+
+    // Resaltar el día actual (ejemplo para Perú: UTC-5)
+    var today = new Date();
+    var currentDay = today.getUTCDay(); // Domingo: 0, Lunes: 1, ..., Sábado: 6
+    var peruDay = (currentDay === 0) ? 7 : currentDay; // Ajuste para mostrar Domingo al final en la interfaz
+
+    if (document.getElementById(days[peruDay - 1])) {
+      document.getElementById(days[peruDay - 1]).style.backgroundColor = '#ffc107';
+    }
+  });
+</script>
+
+</body>
+</html>

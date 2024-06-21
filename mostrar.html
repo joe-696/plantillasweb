@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería Interactiva con Subida a ImgBB</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-gap: 20px;
+        }
+        .gallery img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .gallery img:hover {
+            transform: scale(1.05);
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        .modal-content {
+            margin: 10% auto;
+            padding: 20px;
+            background-color: #fefefe;
+            border-radius: 8px;
+            position: relative;
+            text-align: center;
+        }
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #333;
+        }
+        .close:hover {
+            color: red;
+        }
+        .share-btns {
+            margin-top: 10px;
+        }
+        .share-btns a {
+            display: inline-block;
+            margin-right: 10px;
+            color: #fff;
+            background-color: #25D366; /* Color de WhatsApp */
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .share-btns a:hover {
+            background-color: #128C7E; /* Color de WhatsApp en hover */
+        }
+        .file-upload {
+            display: none;
+        }
+        .upload-btn {
+            display: inline-block;
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .upload-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 class="text-center mb-4">Galería Interactiva con Subida a ImgBB</h1>
+    <input type="file" id="fileInput" class="file-upload">
+    <label for="fileInput" class="upload-btn">Subir Imagen</label>
+    <div class="gallery" id="gallery"></div>
+</div>
+
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img id="modal-img" src="" alt="Imagen en modal">
+        <div class="share-btns">
+            <a href="#" onclick="shareOnWhatsApp()">Compartir en WhatsApp</a>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS, Popper.js, jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Font Awesome JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const gallery = document.getElementById('gallery');
+        const localStorageKey = 'imgbbLinks';
+        const apiKey = '62225e7ac62ebdfda99c1a2ee81087c1';
+
+        // Recuperar la lista de URLs de imágenes almacenadas en localStorage
+        let imageUrls = JSON.parse(localStorage.getItem(localStorageKey)) || [];
+
+        // Función para agregar una imagen a la galería
+        function addImageToGallery(url) {
+            const img = document.createElement('img');
+            img.src = url;
+            img.alt = 'Imagen';
+            img.className = 'img-fluid';
+            img.onclick = function() {
+                openModal(url);
+            };
+            gallery.appendChild(img);
+        }
+
+        // Función para abrir el modal con la imagen seleccionada
+        function openModal(src) {
+            $('#myModal').css('display', 'block');
+            $('#modal-img').attr('src', src);
+        }
+
+        // Función para cerrar el modal
+        function closeModal() {
+            $('#myModal').css('display', 'none');
+        }
+
+        // Función para compartir en WhatsApp
+        function shareOnWhatsApp() {
+            const imageUrl = $('#modal-img').attr('src');
+            const encodedUrl = encodeURIComponent(imageUrl);
+            const whatsappUrl = `https://api.whatsapp.com/send?text=${encodedUrl}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // Función para subir una imagen a ImgBB y obtener el enlace
+        function uploadImage(imageFile) {
+            const formData = new FormData();
+            formData.append('image', imageFile);
+            formData.append('key', apiKey);
+
+            fetch('https://api.imgbb.com/1/upload', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    const imageUrl = data.data.url;
+                    imageUrls.push(imageUrl);
+                    localStorage.setItem(localStorageKey, JSON.stringify(imageUrls));
+                    addImageToGallery(imageUrl);
+                } else {
+                    alert('Error al subir la imagen: ' + data.error.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error al subir la imagen:', error);
+            });
+        }
+
+        // Evento para subir imagen cuando se selecciona un archivo
+        document.getElementById('fileInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                uploadImage(file);
+            }
+        });
+
+        // Cargar las imágenes almacenadas al iniciar la página
+        imageUrls.forEach(url => addImageToGallery(url));
+    });
+</script>
+
+</body>
+</html>
