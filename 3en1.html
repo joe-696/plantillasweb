@@ -1,75 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Captura de Foto Frontal Automática</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        #video {
-            display: none;
-        }
-        #photo {
-            width: 100%;
-            max-width: 400px;
-            border: 2px solid #ccc;
-            border-radius: 5px;
-        }
-    </style>
-</head>
-<body>
-    <video id="video" autoplay></video>
-    <canvas id="canvas" style="display: none;"></canvas>
-    <img id="photo">
-    
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const video = document.getElementById("video");
-            const canvas = document.getElementById("canvas");
-            const photo = document.getElementById("photo");
-
-            // Obtener acceso a la cámara del dispositivo
-            navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" } })
-                .then(stream => {
-                    video.srcObject = stream;
-                    video.addEventListener("loadedmetadata", function() {
-                        // Capturar una foto automáticamente tan pronto como la cámara esté disponible
-                        capturePhoto();
-                    });
-                })
-                .catch(error => {
-                    console.error("Error obteniendo acceso a la cámara:", error);
-                });
-
-            // Función para capturar una foto y mostrarla en pantalla
-            function capturePhoto() {
-                const context = canvas.getContext("2d");
-                canvas.width = video.videoWidth;
-                canvas.height = video.videoHeight;
-                context.drawImage(video, 0, 0, canvas.width, canvas.height);
-                const imgDataUrl = canvas.toDataURL("image/png");
-                photo.src = imgDataUrl;
-                // Mostrar la foto capturada
-                photo.style.display = "block";
-            }
-        });
-    </script>
-</body>
-</html>
-
-
-<!DOCTYPE html>
-<html lang="es">
-<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mi Vida Universitaria</title>
@@ -128,6 +59,10 @@
       margin-top: 20px;
     }
 
+    .animate__animated {
+      animation-duration: 0.5s;
+    }
+
     h2 {
       color: #007bff;
       margin-bottom: 10px;
@@ -141,7 +76,7 @@
     .iframe-container {
       position: relative;
       overflow: hidden;
-      padding-top: 56.25%; /* Aspect ratio (16:9) */
+      padding-top: 120%; /* Aspect ratio (16:9) */
       border-radius: 8px;
       margin-top: 20px;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -155,20 +90,21 @@
       height: 100%;
       border: none;
     }
-
+  
     .quote-container {
-      background-color: #ffffff;
+      background-color: #fff;
       border-radius: 12px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       padding: 30px;
       text-align: center;
       max-width: 80%;
-      margin: auto;
       animation: fadeIn 1s ease-out;
+      margin: auto;
+      margin-top: 20px;
     }
 
     .quote {
-      font-size: 24px;
+      font-size: 32px;
       line-height: 1.6;
       color: #333;
       margin-bottom: 20px;
@@ -183,7 +119,6 @@
       position: absolute;
       right: -0.15em; /* Alinear con el último carácter */
       animation: blink-caret 0.75s step-end infinite;
-      color: #ff7f50; /* Color del cursor */
     }
 
     .author {
@@ -223,9 +158,15 @@
       }
     }
 
+    .date-info {
+      font-size: 14px;
+      color: #ccc;
+      margin-bottom: 10px;
+    }
+
     @media (max-width: 768px) {
       .quote {
-        font-size: 20px;
+        font-size: 24px;
       }
 
       .quote-container {
@@ -242,16 +183,15 @@
 <body>
 
 <header>
-  <h1 class="animate__animated animate__fadeInDown">Mi Vida Universitaria</h1>
+  <h1>Mi Vida Universitaria</h1>
+  <div class="date-info" id="dateInfo"></div>
 </header>
-
-<div class="container text-center animate__animated animate__fadeIn">
-  <button class="btn-section" onclick="openSection('section1')">Mi Semana</button>
-  <button class="btn-section" onclick="openSection('section2')">Mi Día</button>
-  <button class="btn-section" onclick="openSection('section3')">Mis Cursos</button>
+<div class="container text-center">
+  <button class="btn-section" onclick="openSection('section1')">Mi semana</button>
+  <button class="btn-section" onclick="openSection('section2')">Mi día</button>
+  <button class="btn-section" onclick="openSection('section3')">Mis cursos</button>
 </div>
-
-<div class="quote-container animate__animated animate__fadeIn" id="quoteContainer">
+<div class="quote-container" id="quoteContainer">
   <div class="quote" id="quoteText">
     <!-- La frase aleatoria se mostrará aquí -->
   </div>
@@ -260,8 +200,9 @@
   </div>
 </div>
 
+
 <div id="section1" class="section container animate__animated animate__fadeIn">
-  <h2>Sección 1: Organización Semanal</h2>
+  <h2>Sección 1: organizacion semanal</h2>
   <div class="iframe-container">
     <iframe src="https://semanaorganizada.000webhostapp.com/" frameborder="0"></iframe>
   </div>
@@ -291,8 +232,19 @@
     document.getElementById(sectionId).classList.add('active');
   }
 
+  // Función para obtener la fecha y hora actual
+  function updateDateTime() {
+    var now = new Date();
+    var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
+    var formattedDate = now.toLocaleDateString('es-ES', options);
+    document.getElementById('dateInfo').textContent = formattedDate;
+  }
+
+  // Actualizar fecha y hora cada segundo
+  setInterval(updateDateTime, 1000);
+
+  // Mostrar una cita aleatoria al cargar la página
   document.addEventListener('DOMContentLoaded', function() {
-    // Array con las frases destacadas
     var quotes = [
       "La verdad puede doler, pero la mentira duele mucho más.",
       "El éxito no es definitivo, el fracaso no es fatal: lo que cuenta es el coraje para continuar.",
@@ -306,20 +258,17 @@
       "El pasado no define tu futuro, tus acciones en el presente lo hacen."
     ];
 
-    // Función para obtener una frase aleatoria del array
     function getRandomQuote() {
       var randomIndex = Math.floor(Math.random() * quotes.length);
       return quotes[randomIndex];
     }
 
-    // Mostrar una frase aleatoria al cargar la página
     var quoteElement = document.getElementById('quoteText');
 
     function displayRandomQuote() {
       var quote = getRandomQuote();
-      quoteElement.textContent = ''; // Limpiar el texto anterior
+      quoteElement.textContent = '';
 
-      // Mostrar el texto con animación de escritura
       setTimeout(function() {
         typeWriter(quote, 0);
       }, 500);
@@ -335,7 +284,7 @@
       }
     }
 
-    displayRandomQuote(); // Mostrar una frase aleatoria al cargar la página
+    displayRandomQuote();
   });
 </script>
 

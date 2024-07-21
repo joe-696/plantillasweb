@@ -1,0 +1,41 @@
+// Modelo OSI
+digraph {
+	0 [label="Capa 7: Aplicación
+
+Interacción directa con el usuario final.
+Protocolos: HTTP, FTP, SMTP, etc." color=lightblue2 shape=box style=filled]
+	1 [label="Capa 6: Presentación
+
+Traducción, cifrado y compresión de datos.
+Funciones: Codificación, cifrado, compresión." color=lightblue2 shape=box style=filled]
+	2 [label="Capa 5: Sesión
+
+Administración de sesiones de comunicación.
+Funciones: Control de diálogo, sincronización." color=lightblue2 shape=box style=filled]
+	3 [label="Capa 4: Transporte
+
+Transporte confiable de datos.
+Protocolos: TCP, UDP.
+Funciones: Control de flujo, recuperación de errores." color=lightblue2 shape=box style=filled]
+	4 [label="Capa 3: Red
+
+Determinación de rutas y direccionamiento.
+Protocolos: IP, ICMP.
+Funciones: Enrutamiento, direccionamiento lógico." color=lightblue2 shape=box style=filled]
+	5 [label="Capa 2: Enlace de Datos
+
+Transmisión de datos en el enlace físico.
+Protocolos: Ethernet, Wi-Fi.
+Funciones: Direccionamiento físico, detección de errores." color=lightblue2 shape=box style=filled]
+	6 [label="Capa 1: Física
+
+Transmisión física de datos a través del medio.
+Medios: Cables, ondas de radio.
+Funciones: Señales eléctricas, mecánicas, ópticas." color=lightblue2 shape=box style=filled]
+	0 -> 1
+	1 -> 2
+	2 -> 3
+	3 -> 4
+	4 -> 5
+	5 -> 6
+}
